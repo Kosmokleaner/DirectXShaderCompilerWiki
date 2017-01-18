@@ -56,7 +56,8 @@ These are recommendations from experience to improve your coding, not official e
 
 DirectX Shader Compiler is distributed under the terms of the MIT license.
 
-See LICENSE-MIT and COPYRIGHT for details.
+See [LICENSE-MIT](https://github.com/Microsoft/DirectXShaderCompiler/blob/master/LICENSE-MIT)
+and [COPYRIGHT](https://github.com/Microsoft/DirectXShaderCompiler/blob/master/COPYRIGHT) for details.
 
 ## Code of Conduct
 
