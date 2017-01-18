@@ -4,7 +4,11 @@ Welcome to the DirectXShaderCompiler wiki!
 
 The DirectX Shader Compiler is a compiler and related set of tools used to compile High-Level Shader Language (HLSL) programs into DirectX Intermediate Language (DXIL) representation. Applications that make use of DirectX for graphics, games, and computation can use it to generate shader programs.
 
+## Building Sources
 
+## Running Tests
+
+## Running Shaders
 
 ## Making Changes
 
