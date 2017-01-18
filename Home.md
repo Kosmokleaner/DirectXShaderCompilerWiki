@@ -38,7 +38,7 @@ To make contributions, see the [Contributing.md](https://github.com/Microsoft/Di
 
 You can find documentation for this project in the docs/ directory. These contain the original LLVM documentation files, as well as two new files worth nothing:
 
-* [HLSLChanges.rst](https://githhttps://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/HLSLChanges.rst):
+* [HLSLChanges.rst](https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/HLSLChanges.rst):
  this is the starting point for how this fork diverges from the original llvm/clang sources
 * [DXIL.rst](https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/DXIL.rst):
  this file contains the specification for the DXIL format
