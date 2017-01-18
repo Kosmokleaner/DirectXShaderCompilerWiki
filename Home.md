@@ -43,7 +43,7 @@ You can find documentation for this project in the docs/ directory. These contai
 * [DXIL.rst](https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/DXIL.rst):
  this file contains the specification for the DXIL format
 
-* [tools/clang/docs/UsingDxc.rst](https://github.com/Microsoft/DirectXShaderCompiler/blob/master/tools/clang/docs/UsingDxc.rst_):
+* [tools/clang/docs/UsingDxc.rst](https://github.com/Microsoft/DirectXShaderCompiler/blob/master/tools/clang/docs/UsingDxc.rst):
  this file contains a user guide for dxc.exe
 
 ## Other Useful Tools
