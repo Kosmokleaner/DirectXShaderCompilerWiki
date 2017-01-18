@@ -21,7 +21,7 @@ The DirectX Shader Compiler is currently in preview stage but is expected to be 
 The goal of the project is to allow the broader community of shader developers to contribute to the language and representation of shader programs, maintaining the principles of compatibility and supportability for the platform. It's currently in active development across two axes: language evolution (with no impact to DXIL representation), and surfacing hardware capabilities (with impact to DXIL, and thus requiring coordination with GPU implementations).
 
 ## Building Sources
-To see how to build the compiler yourself, [check here.]
+To see how to build the compiler, [check here.]
 (https://github.com/Microsoft/DirectXShaderCompiler/wiki/Building-Sources)
 
 ## Running Tests
@@ -38,8 +38,11 @@ To make contributions, see the [Contributing.md](https://github.com/Microsoft/Di
 
 You can find documentation for this project in the docs/ directory. These contain the original LLVM documentation files, as well as two new files worth nothing:
 
-* HLSLChanges.rst: this is the starting point for how this fork diverges from the original llvm/clang sources
-* DXIL.rst: this file contains the specification for the DXIL format
+* [HLSLChanges.rst](https://github.com/Microsoft/DirectXShaderCompiler/blob/master/HLSLChanges.rst):
+ this is the starting point for how this fork diverges from the original llvm/clang sources
+* [DXIL.rst](https://github.com/Microsoft/DirectXShaderCompiler/blob/master/DXIL.rst):
+ this file contains the specification for the DXIL format
+
 * tools/clang/docs/UsingDxc.rst: this file contains a user guide for dxc.exe
 
 ## Other Useful Tools
