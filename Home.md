@@ -7,7 +7,7 @@ The DirectX Shader Compiler is a compiler and related set of tools used to compi
 ## Features and Goals
 
 ## Building Sources
-
+[wiki page](https://github.com/Microsoft/DirectXShaderCompiler/wiki/Building-Sources)
 ## Running Tests
 
 ## Running Shaders
