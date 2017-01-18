@@ -19,7 +19,7 @@ To compile shaders and samples with this compiler, [check here](https://github.c
 
 ## Making Changes
 
-To make contributions, see the CONTRIBUTING.md file in this project.
+To make contributions, see the [Contributing.md](https://github.com/Microsoft/DirectXShaderCompiler/CONTRIBUTING.md) file in this project.
 
 ## Documentation
 
