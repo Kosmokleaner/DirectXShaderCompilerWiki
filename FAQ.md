@@ -19,13 +19,13 @@ Experimental mode is a new feature of Direct3D in Windows 10. It lets software d
 
 1. Turn on Developer Mode in your OS:  
   Settings -> Update&Security -> For Developers -> (*) Developer Mode
-2. Enable an experimental mode feature in your app by calling this routine before calling CreateDevice.  
+2. Enable an experimental mode feature in your app by calling this routine before calling `CreateDevice()`.  
   `D3D12EnableExperimentalFeatures( D3D12ExperimentalShaderModels );`
 3. Acquire a driver (or software renderer) that supports experimental mode
 
 ##Why use Clang/LLVM?
 15 years ago, HLSL shaders were no more than 64 instructions, and typically 12.
-So the first version of the HLSL compiler was optimized for very short shaders. Now many codebases involve 1000s of shaders each with 1000s of lines of code. GPU programming is now much closer to CPU programming in terms of scale, so we decided to rebuilding the compiler on a trusted/stable foundation with an excellent full-scale track record. When choosing a new basis for a strategic element like the GPU compiler, we recognized the industry cohesion around Clang and LLVM. By basing the new version on this foundation we enable GPU developers to benefit from, and build upon the large ecosystem of tools, utilities, documentation, core technologies, and expertise of the Clang/LLVM framework.
+So the first version of the HLSL compiler was optimized for very short shaders. Now many codebases involve 1000s of shaders each with 1000s of lines of code. GPU programming is now much closer to CPU programming in terms of scale, so we decided to rebuild the compiler on a trusted/stable foundation with an excellent full-scale track record. When choosing a new basis for a strategic element like the GPU compiler, we recognized the industry cohesion around Clang and LLVM. By basing the new version on this foundation we enable GPU developers to benefit from, and build upon the large ecosystem of tools, utilities, documentation, core technologies, and expertise of the Clang/LLVM framework.
 	Importers, exporters, translators, pretty printer (unparsers), intellisense, debugging, etc.
 
 ##What happens to the old compiler (fxc)?
