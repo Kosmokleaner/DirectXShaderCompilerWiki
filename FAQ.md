@@ -17,10 +17,10 @@ The wave math routines are a new set of intrinsics for use in HLSL that enable o
 ##What is Experimental mode, and how do I enable experimental features?
 Experimental mode is a new feature of Direct3D in Windows 10. It lets software developers collaborate with each other and with IHVs on prototyping of new features on GPU drivers. Here is how to access it:
 
-1. Turn on Developer Mode in your OS:
-  * Settings -> Update&Security -> For Developers -> (*) Developer Mode
-2. Enable an experimental mode feature in your app by calling this routine before calling `CreateDevice()`.
-  *  `D3D12EnableExperimentalFeatures( D3D12ExperimentalShaderModels );`
+1. Turn on Developer Mode in your OS:  
+  Settings -> Update&Security -> For Developers -> (*) Developer Mode
+2. Enable an experimental mode feature in your app by calling this routine before calling CreateDevice.  
+  `D3D12EnableExperimentalFeatures( D3D12ExperimentalShaderModels );`
 3. Acquire a driver (or software renderer) that supports experimental mode
 
 ##Why use Clang/LLVM?
