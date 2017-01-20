@@ -200,7 +200,7 @@ These intrinsics compute the specified operation across all active lanes in the
 wave and broadcast the final result to all active lanes. Therefore, the final
 output is guaranteed uniform across the wave.
 
-    bool WaveAllEqual(\<type\> expr )
+    bool WaveAllEqual(<type> expr )
 
 Returns true if \<expr\> is the same for every active lane in the current wave
 (and thus uniform across it).
@@ -223,7 +223,7 @@ like:
     result = countbits( waveBallot( bBit ) );
 
 -
-    \<type\> WaveAllSum(\<type\> expr)
+    <type> WaveAllSum( <type> expr )
 
 Sums up the value of \<expr\> across all active lanes in the current wave, and
 replicates it to all lanes in said wave. The order of operations is undefined.
@@ -234,28 +234,28 @@ Example:
     float3 center = total/count; // compute average of these positions
 -
 
-    \<type\> WaveAllProduct(\<type\> expr)
+    <type> WaveAllProduct( <type> expr)
 
 Multiplies the values of \<expr\> together across all active lanes in the
 current wave and replicates it back to all active lanes. The order of operations
 is undefined.
 
-    \<int\_type\> WaveAllBitAnd( \<int\_type\> expr)
+    <int_type> WaveAllBitAnd( <int_type> expr)
 
 Returns the bitwise AND of all the values of \<expr\> across all active lanes in
 the current wave and replicates it back to all active lanes.
 
-    \<int\_type\> WaveAllBitOr( \<int\_type\> expr )
+    <int_type> WaveAllBitOr( <int_type> expr )
 
 Returns the bitwise OR of all the values of \<expr\> across all active lanes in
 the current wave and replicates it back to all active lanes.
 
-    \<int\_type\> WaveAllBitXor( \<int\_type\> expr)
+    <int_type> WaveAllBitXor( <int_type> expr)
 
 Returns the bitwise Exclusive OR of all the values of \<expr\> across all active
 lanes in the current wave and replicates it back to all active lanes.
 
-    \<type\> WaveAllMin(\<type\> expr)
+    <type> WaveAllMin( <type> expr)
 
 Computes minimum value of \<expr\> across all active lanes in the current wave
 and replicates it back to all active lanes. The order of operations is
@@ -265,7 +265,7 @@ Example:
 
     float3 minPos = WaveAllMin( myPoint.position );
     BoundingBox.min = min( minPos, BoundingBox.min );
-    \<type\> WaveAllMax(\<type\> expr);
+    <type> WaveAllMax( <type> expr);
 
 Computes maximum value of \<expr\> across all active lanes in the current wave
 and replicates it back to all active lanes. The order of operations is
@@ -295,7 +295,7 @@ This can be implemented more efficiently than a full WavePrefixSum() via the
 following pseudo code:
 
     uint bits = WaveBallot( bBit );
-    laneMaskLT = (1 \<\< WaveGetLaneIndex()) - 1;
+    laneMaskLT = (1 << WaveGetLaneIndex()) - 1;
     prefixBitCount = countbits( bits & laneMaskLT);
 
 ####Example:
@@ -335,7 +335,7 @@ The order of operations on this routine cannot be guaranteed, so effectively the
 [precise] flag is ignored within it. A postfix product can be computed by
 multiplying the prefix product by the current lane’s value.
 
-    \<type\> WavePrefixSum(\<type\> value )
+    <type> WavePrefixSum(\<type\> value )
 
 Returns the sum of all of the \<value\>s in the active lanes of this wave having
 indices less than this one.
@@ -383,8 +383,8 @@ contain pixel shader quads as defined here. The indices of the pixels in the
 quad are defined in scan-line or reading order:
 
 >   X --\>
-Y \| [0] [1]
->   v [2] [3]
+>   Y \| [0] [1]
+>      v [2] [3]
 
 Where the coordinates are [0] is at x,y, [1] is at [x+1,y], [2] is at [x, y+1],
 and [3] is at [x+1, y+1].
