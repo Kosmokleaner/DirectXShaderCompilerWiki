@@ -20,7 +20,7 @@ Exceptions are indicated.
 These intrinsics operate as though the following statement was performed by
 default:
 
-\@import waveOps.h;
+    @import waveOps.h;
 
 This statement is not supported or required in shader model 6.0 shaders. It will
 be available once there is support for import libraries / modules.
@@ -57,18 +57,18 @@ point). Those that do not produce visible results are termed helper lanes.
 **Caps Flags:**
 ---------------
 
-BOOL WaveOps: The driver should expose the waveOps caps flag if it can support
+`BOOL WaveOps`: The driver should expose the waveOps caps flag if it can support
 the intrinsics in this specification. The driver must set this cap for the D3D
 runtime to load shaders containing these intrinsics. On implementations that do
 not set this bit, CreateShader() will fail on such shaders.
 
-UINT WaveLaneCountMin: this cap specifies the baseline number of lanes in the
+`UINT WaveLaneCountMin`: this cap specifies the baseline number of lanes in the
 SIMD wave that this implementation can support. This term is sometimes known as
 “wavefront size” or “warp width”. This capability value is exposed at the API
 level. Currently apps should rely on only this minimum value for sizing
 workloads.
 
-UINT WaveLaneCountMax: this cap specifies the maximum number of lanes in the
+`UINT WaveLaneCountMax`: this cap specifies the maximum number of lanes in the
 SIMD wave that this implementation can support. (aka maximum “wavefront size” or
 “warp width”). This cap is reserved for future expansion, and is not expected to
 be used by applications initially.
@@ -100,7 +100,7 @@ is executing.
 
 ### Wave Query Intrinsics:
 
-    bool WaveIsFirstLane()
+`bool WaveIsFirstLane()`
 
 This result returns true only for the active lane in the current wave with the
 smallest index. It can be used to identify operations that are to be executed
@@ -120,12 +120,12 @@ between 4 and 128. Includes all lanes (active, inactive and/or helper lanes).
 
 Example:
 
-uint laneCount = WaveGetLaneCount(); // number of lanes in wave
+    uint laneCount = WaveGetLaneCount(); // number of lanes in wave
 
 *Note: the result returned from this routine may vary significantly depending on
 the implementation (vendor, generation, architecture, etc.).*
 
-uint WaveGetLaneIndex()
+    uint WaveGetLaneIndex()
 
 Returns the index of the current lane within the current wave. The result must
 be in the [0, WaveGetLaneCount) range.
@@ -135,15 +135,15 @@ be in the [0, WaveGetLaneCount) range.
 This set of intrinsics compare values across threads currently active from the
 current wave.
 
-bool WaveAnyTrue( bool expr )
+    bool WaveAnyTrue( bool expr )
 
 Returns true if \<expr\> is true in any active lane in the current wave.
 
-bool WaveAllTrue( bool expr )
+    bool WaveAllTrue( bool expr )
 
 Returns true if \<expr\> is true in all active lanes in the current wave.
 
-uint4 WaveBallot( bool expr )
+    uint4 WaveBallot( bool expr )
 
 Returns an int4 as a bitmask of the evaluation of the Boolean \<expr\> for all
 active lanes in the current wave. The least-significant bit corresponds to the
