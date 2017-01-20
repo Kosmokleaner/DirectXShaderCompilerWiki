@@ -318,7 +318,7 @@ where the number of elements written per lane is either 1 or 0.
     appendOffset = WaveReadFirstLane( appendOffset ); // broadcast value
     appendOffset += laneAppendOffset; // and add in the offset for this lane
     buffer[appendOffset] = myData; // write to the offset location for this lane
-
+-
 
     <type> WavePrefixProduct( <type> value )
 
@@ -335,7 +335,7 @@ The order of operations on this routine cannot be guaranteed, so effectively the
 [precise] flag is ignored within it. A postfix product can be computed by
 multiplying the prefix product by the current lane’s value.
 
-    <type> WavePrefixSum(\<type\> value )
+    <type> WavePrefixSum( <type> value )
 
 Returns the sum of all of the \<value\>s in the active lanes of this wave having
 indices less than this one.
