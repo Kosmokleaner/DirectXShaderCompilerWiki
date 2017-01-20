@@ -12,8 +12,7 @@ The primary goal of this first release is parity and consistency with existing s
 
 ##What is WaveMath?
 A new set of intrinsics for use in HLSL that enable operations across lanes in the SIMD processor cores.
-These can help the performance of certain algorithms like culling and packing sparse data sets.
-<link to github doc and MSDN page>
+These can help the performance of certain algorithms like culling and packing sparse data sets. Documentation is [here](https://github.com/Microsoft/DirectXShaderCompiler/wiki/Wave-Math-Intrinsics)
 
 ##What is Experimental mode, and how do I enable experimental features?
 Experimental mode lets software developers collaborate with each other and with IHVs on prototyping of new features on GPU drivers. Here is how to use it:
