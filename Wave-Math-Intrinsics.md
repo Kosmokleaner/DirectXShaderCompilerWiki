@@ -265,6 +265,8 @@ Example:
 
     float3 minPos = WaveAllMin( myPoint.position );
     BoundingBox.min = min( minPos, BoundingBox.min );
+
+-
     <type> WaveAllMax( <type> expr);
 
 Computes maximum value of \<expr\> across all active lanes in the current wave
