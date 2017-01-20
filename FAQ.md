@@ -16,7 +16,8 @@ These can help the performance of certain algorithms like culling and packing sp
 <link to github doc and MSDN page>
 
 ##What is Experimental mode, and how do I enable experimental features?
-Experimental Mode lets software developers collaborate with each other and with IHVs on prototyping of new features with IHVs on drivers that support it. Here is how to use it:
+Experimental mode lets software developers collaborate with each other and with IHVs on prototyping of new features on GPU drivers. Here is how to use it:
+
 1. Turn on Developer Mode in your OS:
     Settings -> Update&Security -> For Developers -> (*) Developer Mode
 2. Enable experimental mode in your app by calling this routine:
