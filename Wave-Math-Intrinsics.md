@@ -221,9 +221,9 @@ This can be implemented more efficiently than a full WaveAllSum via something
 like:
 
     result = countbits( waveBallot( bBit ) );
+```
 
--
-    <type> WaveAllSum( <type> expr )
+    **<type> WaveAllSum( <type> expr )**
 
 Sums up the value of \<expr\> across all active lanes in the current wave, and
 replicates it to all lanes in said wave. The order of operations is undefined.
