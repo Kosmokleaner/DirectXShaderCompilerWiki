@@ -1,8 +1,8 @@
 **Introduction:**
 -----------------
 
-Up until now, the HLSL programming model exposes only a single thread of
-execution. As of now, new wave-level operations are provided to explicitly take advantage
+Up until now, the HLSL programming model has exposed only a single thread of
+execution. As of v6.0, new wave-level operations are provided to explicitly take advantage
 of the fact that on current GPUs, many threads can be executing in lockstep on
 the same core simultaneously. For example, these intrinsics enable the
 elimination of barrier constructs when the scope of synchronization is within
@@ -100,7 +100,7 @@ is executing.
 
 ### Wave Query Intrinsics:
 
-`bool WaveIsFirstLane()`
+    bool WaveIsFirstLane()
 
 This result returns true only for the active lane in the current wave with the
 smallest index. It can be used to identify operations that are to be executed
