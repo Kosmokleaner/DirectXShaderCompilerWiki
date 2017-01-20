@@ -100,7 +100,7 @@ is executing.
 
 ### Wave Query Intrinsics:
 
-bool WaveIsFirstLane()
+    bool WaveIsFirstLane()
 
 This result returns true only for the active lane in the current wave with the
 smallest index. It can be used to identify operations that are to be executed
@@ -108,15 +108,12 @@ only once per wave.
 
 Example:
 
-if ( WaveIsFirstLane() )
+    if ( WaveIsFirstLane() )
+    {
+        . . . // once per-wave code
+    }
 
-{
-
-. . . // once per-wave code
-
-}
-
-uint WaveGetLaneCount()
+`uint WaveGetLaneCount()`
 
 Returns the number of lanes in a wave on this architecture. The result will be
 between 4 and 128. Includes all lanes (active, inactive and/or helper lanes).
