@@ -11,17 +11,18 @@ The primary goal of this first release is parity and consistency with existing s
 1. support for 64-bit integer data types (int64, uint64),
 2. the wave math intrinsics.
 
-##What is WaveMath?
-A new set of intrinsics for use in HLSL that enable operations across lanes in the SIMD processor cores.
-These can help the performance of certain algorithms like culling and packing sparse data sets. Documentation is [here](https://github.com/Microsoft/DirectXShaderCompiler/wiki/Wave-Math-Intrinsics)
+##What are the Wave Math intrinsics?
+The wave math routines are a new set of intrinsics for use in HLSL that enable operations across lanes in the SIMD processor cores. These can help the performance of certain algorithms like culling and packing sparse data sets. The documentation is [here](https://github.com/Microsoft/DirectXShaderCompiler/wiki/Wave-Math-Intrinsics)
 
 ##What is Experimental mode, and how do I enable experimental features?
-Experimental mode lets software developers collaborate with each other and with IHVs on prototyping of new features on GPU drivers. Here is how to use it:
+Experimental mode is a new feature of Direct3D in Windows 10. It lets software developers collaborate with each other and with IHVs on prototyping of new features on GPU drivers. Here is how to access it:
 
 1. Turn on Developer Mode in your OS:
     Settings -> Update&Security -> For Developers -> (*) Developer Mode
-2. Enable experimental mode in your app by calling this routine:
+2. Enable an experimental mode feature in your app by calling this routine before `CreateDevice()`.
+
     D3D12EnableExperimentalFeatures( D3D12ExperimentalShaderModels );
+
 3. Acquire a driver (or software renderer) that supports experimental mode
 
 ##Why use Clang/LLVM?
