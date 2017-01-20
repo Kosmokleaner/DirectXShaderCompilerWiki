@@ -1,11 +1,11 @@
 ##What is Shader Model 6?
 <link to github list of shader versions>
-This is the number of the first version of HLSL to be implemented on the new framework. This initial version is designed to be as identical as possible to the previous version (v5.1) to make it easy to integrate into existing projects. All your existing shaders should ’just work’, but you get the stability and robustness of a foundation containing 1000s of developer contribution hours.
+Shader model v6 is the first version of HLSL to be implemented on the Clang/LLVM framework. To make it easy to integrate into existing projects, this new version is designed to be as identical as possible to the previous version (v5.1). All existing shaders should ’just work’, but you get the stability and robustness of a foundation containing 1000s of developer contribution hours.
 
 ##What is DXIL?
-DirectX Intermediate Language is a version of LLVM IR v3.7 with additions to support the key intrinsics and features of HLSL. The initial availability of this project was DXIL v0.70 (beta), but will shortly be updated to DXIL v1.0 for release.
+DXIL (DirectX Intermediate Language) is a version of LLVM IR v3.7 with additions to support the key intrinsics and features of HLSL. The initial posting of this project uses DXIL v0.70 (beta), but will shortly be updated to DXIL v1.0 for release.
 
-##What are the new features of this release (v6.0):
+##What are the new features of this version (v6.0):
 The primary goal of this first release is parity and consistency with existing shaders, however, some new features have been added:
 	1) support for 64-bit integer data types (int64, uint64),
 	2)  the wave math intrinsics.
@@ -17,11 +17,11 @@ These can help the performance of certain algorithms like culling and packing sp
 
 ##What is Experimental mode, and how do I enable experimental features?
 Experimental Mode lets software developers collaborate with each other and with IHVs on prototyping of new features with IHVs on drivers that support it. Here is how to use it:
-              1. Turn on Developer Mode in your OS:
-                            Settings -> Update&Security -> For Developers -> (*) Developer Mode
-              2. Enable experimental mode in your app by calling this routine:
-                            D3D12EnableExperimentalFeatures( D3D12ExperimentalShaderModels );
-              3. Acquire a driver (or software renderer) that supports experimental mode
+1. Turn on Developer Mode in your OS:
+    Settings -> Update&Security -> For Developers -> (*) Developer Mode
+2. Enable experimental mode in your app by calling this routine:
+    D3D12EnableExperimentalFeatures( D3D12ExperimentalShaderModels );
+3. Acquire a driver (or software renderer) that supports experimental mode
 
 ##Why use Clang/LLVM?
 15 years ago, HLSL shaders were no more than 64 instructions, and typically 12.
@@ -41,4 +41,4 @@ Newer, or beta versions will be available from this site.
 Yes, you can: Language features are those which do not require changes to the underlying hardware or drivers. Examples include true enums, bitfield notation, protected/private, etc. If there is enough demand for those features, we will be happy to accept your pull request and your features can ship in the next version of the official compiler.
 
 ##Can I add new hardware-based features to the language?
-Yes, you can, but it’s a bit more work: To add new capabilities to the hardware feature set requires changes to the GPU driver underneath, and that involves working closely with the GPU vendors. To facilitate this, software developers and hardware vendors can use the new Experimental Mode in Direct3D to collaborate to prototype new features. This lets groups of developers and hardware vendors converge on the optimal design of a feature before making it available to general end users/consumers.
+Yes, you can, but it’s a bit more work: To add new capabilities to the hardware feature set requires changes to the GPU driver underneath, and that involves working closely with the GPU and platform vendors. To facilitate this, the new Experimental Mode in Direct3D has been added to provide a safe way to prototype new features. This lets groups of developers and hardware vendors converge on the optimal design of a feature before making it available to general end users/consumers.
