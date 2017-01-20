@@ -7,6 +7,7 @@ DXIL (DirectX Intermediate Language) is a version of LLVM IR v3.7 with additions
 
 ##What are the new features of this version (v6.0):
 The primary goal of this first release is parity and consistency with existing shaders, however, some new features have been added:
+
 1. support for 64-bit integer data types (int64, uint64),
 2. the wave math intrinsics.
 
