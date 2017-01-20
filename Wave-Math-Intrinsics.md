@@ -140,11 +140,9 @@ current wave.
 Returns true if \<expr\> is true in any active lane in the current wave.
 
     bool WaveAllTrue( bool expr )
-
 Returns true if \<expr\> is true in all active lanes in the current wave.
 
     uint4 WaveBallot( bool expr )
-
 Returns an int4 as a bitmask of the evaluation of the Boolean \<expr\> for all
 active lanes in the current wave. The least-significant bit corresponds to the
 lane with index zero. The bits corresponding to inactive lanes will be zero. The
@@ -152,9 +150,8 @@ bits that are greater than or equal to WaveGetLaneCount will be zero.
 
 Example:
 
-// get a bitwise representation of the number of currently active lanes:
-
-uint4 waveBits = WaveBallot( true ); // convert to bits
+    // get a bitwise representation of the number of currently active lanes:
+    uint4 waveBits = WaveBallot( true ); // convert to bits
 
 *Note: the number of bits set in the result of this routine may vary
 significantly depending on the implementation (vendor, generation, architecture,
