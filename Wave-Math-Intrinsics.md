@@ -140,9 +140,11 @@ current wave.
 Returns true if \<expr\> is true in any active lane in the current wave.
 
     bool WaveAllTrue( bool expr )
+
 Returns true if \<expr\> is true in all active lanes in the current wave.
 
     uint4 WaveBallot( bool expr )
+
 Returns an int4 as a bitmask of the evaluation of the Boolean \<expr\> for all
 active lanes in the current wave. The least-significant bit corresponds to the
 lane with index zero. The bits corresponding to inactive lanes will be zero. The
@@ -180,12 +182,12 @@ The following routines enable all active lanes in the current wave to receive
 the value from the specified lane, effectively broadcasting it. The return value
 from an invalid lane is undefined.
 
-\<type\> WaveReadLaneFirst( \<type\> expr )
+    \<type\> WaveReadLaneFirst( \<type\> expr )
 
 Returns the value of expr for the active lane of the current wave with the
 smallest index. The resulting value is thus uniform across the wave.
 
-\<type\> WaveReadLaneAt( \<type\> expr, uint laneIndex)
+    \<type\> WaveReadLaneAt( \<type\> expr, uint laneIndex)
 
 Returns the value of expr for the given lane index within the current wave. The
 input lane index must be uniform across the wave. The resulting value is thus
@@ -198,18 +200,18 @@ These intrinsics compute the specified operation across all active lanes in the
 wave and broadcast the final result to all active lanes. Therefore, the final
 output is guaranteed uniform across the wave.
 
-bool WaveAllEqual(\<type\> expr )
+    bool WaveAllEqual(\<type\> expr )
 
 Returns true if \<expr\> is the same for every active lane in the current wave
 (and thus uniform across it).
 
-bool WaveAllEqualBool( bool expr )
+    bool WaveAllEqualBool( bool expr )
 
 Returns true if \<expr\> is the same for every active lane in the current wave
 (and thus uniform across it). Input is a boolean. Performance is higher than the
 nonBool version WaveAllEqual();
 
-uint WaveAllCountBits( bool bBit )
+    uint WaveAllCountBits( bool bBit )
 
 Counts the number of Boolean variables (bBit) which evaluate to true across all
 active lanes in the current wave, and replicates the result to all lanes in the
@@ -218,41 +220,42 @@ wave. Providing an explicit true Boolean counts the number of active lanes.
 This can be implemented more efficiently than a full WaveAllSum via something
 like:
 
-result = countbits( waveBallot( bBit ) );
+    result = countbits( waveBallot( bBit ) );
 
-\<type\> WaveAllSum(\<type\> expr)
+
+    \<type\> WaveAllSum(\<type\> expr)
 
 Sums up the value of \<expr\> across all active lanes in the current wave, and
 replicates it to all lanes in said wave. The order of operations is undefined.
 
 Example:
 
-float3 total = WaveAllSum( position ); // sum positions in wave
+    float3 total = WaveAllSum( position ); // sum positions in wave
+    float3 center = total/count; // compute average of these positions
 
-float3 center = total/count; // compute average of these positions
 
-\<type\> WaveAllProduct(\<type\> expr)
+    \<type\> WaveAllProduct(\<type\> expr)
 
 Multiplies the values of \<expr\> together across all active lanes in the
 current wave and replicates it back to all active lanes. The order of operations
 is undefined.
 
-\<int\_type\> WaveAllBitAnd( \<int\_type\> expr)
+    \<int\_type\> WaveAllBitAnd( \<int\_type\> expr)
 
 Returns the bitwise AND of all the values of \<expr\> across all active lanes in
 the current wave and replicates it back to all active lanes.
 
-\<int\_type\> WaveAllBitOr( \<int\_type\> expr )
+    \<int\_type\> WaveAllBitOr( \<int\_type\> expr )
 
 Returns the bitwise OR of all the values of \<expr\> across all active lanes in
 the current wave and replicates it back to all active lanes.
 
-\<int\_type\> WaveAllBitXor( \<int\_type\> expr)
+    \<int\_type\> WaveAllBitXor( \<int\_type\> expr)
 
 Returns the bitwise Exclusive OR of all the values of \<expr\> across all active
 lanes in the current wave and replicates it back to all active lanes.
 
-\<type\> WaveAllMin(\<type\> expr)
+    \<type\> WaveAllMin(\<type\> expr)
 
 Computes minimum value of \<expr\> across all active lanes in the current wave
 and replicates it back to all active lanes. The order of operations is
@@ -260,11 +263,9 @@ undefined.
 
 Example:
 
-float3 minPos = WaveAllMin( myPoint.position );
-
-BoundingBox.min = min( minPos, BoundingBox.min );
-
-\<type\> WaveAllMax(\<type\> expr);
+    float3 minPos = WaveAllMin( myPoint.position );
+    BoundingBox.min = min( minPos, BoundingBox.min );
+    \<type\> WaveAllMax(\<type\> expr);
 
 Computes maximum value of \<expr\> across all active lanes in the current wave
 and replicates it back to all active lanes. The order of operations is
@@ -272,9 +273,9 @@ undefined.
 
 Example:
 
-float3 maxPos = WaveAllMax( myPoint.position );
+    float3 maxPos = WaveAllMax( myPoint.position );
+    BoundingBox.max = max( maxPos, BoundingBox.max );
 
-BoundingBox.max = max( maxPos, BoundingBox.max );
 
 ### Wave Scan/Prefix Intrinsics
 
@@ -284,7 +285,7 @@ returns for each lane the sum of elements up to but not including that lane.
 Note: Postfix versions of the Prefix routines can be implemented by adding in
 the current lane’s value.
 
-uint WavePrefixCountBits( Bool bBit )
+    uint WavePrefixCountBits( Bool bBit )
 
 Returns the sum of all the specified Boolean variables (bBit) set to true across
 all active lanes with indices smaller than this lane’s. A postfix version is
@@ -293,48 +294,31 @@ implemented by adding the current lane’s bit value.
 This can be implemented more efficiently than a full WavePrefixSum() via the
 following pseudo code:
 
-uint bits = WaveBallot( bBit );
+    uint bits = WaveBallot( bBit );
+    laneMaskLT = (1 \<\< WaveGetLaneIndex()) - 1;
+    prefixBitCount = countbits( bits & laneMaskLT);
 
-laneMaskLT = (1 \<\< WaveGetLaneIndex()) - 1;
+####Example:
 
-prefixBitCount = countbits( bits & laneMaskLT);
-
-Example:
-
-Use WavePrefixCountBits() to implement a compacted write to an ordered stream
+Use `WavePrefixCountBits()` to implement a compacted write to an ordered stream
 where the number of elements written per lane is either 1 or 0.
 
-bool bDoesThisLaneHaveAnAppendItem = \<expr\>;
+    bool bDoesThisLaneHaveAnAppendItem = \<expr\>;
+    // compute number of items to append for the whole wave
+    uint laneAppendOffset = WavePrefixCountBits( bDoesThisLaneHaveAnAppendItem );
+    uint appendCount = WaveAllCountBits( bDoesThisLaneHaveAnAppendItem);
+    // update the output location for this whole wave
+    uint appendOffset;
+    if ( WaveIsFirstLane () )
+    {
+        // this way, we only issue one atomic for the entire wave, which reduces contention
+        // and keeps the output data for each lane in this wave together in the output buffer
+        appendOffset = atomicAdd(bufferSize, appendCount);
+    }
+    appendOffset = WaveReadFirstLane( appendOffset ); // broadcast value
+    appendOffset += laneAppendOffset; // and add in the offset for this lane
+    buffer[appendOffset] = myData; // write to the offset location for this lane
 
-// compute number of items to append for the whole wave
-
-uint laneAppendOffset = WavePrefixCountBits( bDoesThisLaneHaveAnAppendItem );
-
-uint appendCount = WaveAllCountBits( bDoesThisLaneHaveAnAppendItem);
-
-// update the output location for this whole wave
-
-uint appendOffset;
-
-if ( WaveIsFirstLane () )
-
-{
-
-// this way, we only issue one atomic for the entire wave, which reduces
-contention
-
-// and keeps the output data for each lane in this wave together in the output
-buffer
-
-appendOffset = atomicAdd(bufferSize, appendCount);
-
-}
-
-appendOffset = WaveReadFirstLane( appendOffset ); // broadcast value
-
-appendOffset += laneAppendOffset; // and add in the offset for this lane
-
-buffer[appendOffset] = myData; // write to the offset location for this lane
 
 \<type\> WavePrefixProduct(\<type\> value )
 
@@ -343,28 +327,24 @@ with indices less than this lane.
 
 Example:
 
-// compute offset into buffer for this lane’s writes
-
-uint numWrites; // number of DWORDs to write to the output from this lane
-
-uint offset = WavePrefixProduct( numWrites );
+    // compute offset into buffer for this lane’s writes
+    uint numWrites; // number of DWORDs to write to the output from this lane
+    uint offset = WavePrefixProduct( numWrites );
 
 The order of operations on this routine cannot be guaranteed, so effectively the
 [precise] flag is ignored within it. A postfix product can be computed by
 multiplying the prefix product by the current lane’s value.
 
-\<type\> WavePrefixSum(\<type\> value )
+    \<type\> WavePrefixSum(\<type\> value )
 
 Returns the sum of all of the \<value\>s in the active lanes of this wave having
 indices less than this one.
 
 Example:
 
-// compute distinct offset into buffer for each lane
-
-uint numWrites; // number of values to write to the output from this lane
-
-uint offset = WavePrefixSum(numWrites); // offset for this lane
+    // compute distinct offset into buffer for each lane
+    uint numWrites; // number of values to write to the output from this lane
+    uint offset = WavePrefixSum(numWrites); // offset for this lane
 
 The order of operations on this routine cannot be guaranteed, so effectively the
 [precise] flag is ignored within it. A postfix sum can be computed by adding the
