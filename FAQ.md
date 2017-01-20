@@ -1,6 +1,6 @@
 ##What is Shader Model 6?
 <link to github list of shader versions>
-Shader model v6 is the first version of HLSL to be implemented on the Clang/LLVM framework. To make it easy to integrate into existing projects, this new version is designed to be as identical as possible to the previous version (v5.1). All existing shaders should ’just work’, but you get the stability and robustness of a foundation containing 1000s of developer contribution hours.
+Shader model v6 is the first version of HLSL to be implemented on the Clang/LLVM framework. To make it easy to integrate into existing projects, this new version is designed to be as identical as possible to the previous version (v5.1). All existing shaders should ’just work’, but you get the stability and robustness of a foundation containing 1000s of developer contribution hours. The output of shader model 6.0 is the LLVM-based DXIL (which replaces the older dxbc format)
 
 ##What is DXIL?
 DXIL (DirectX Intermediate Language) is a version of LLVM IR v3.7 with additions to support the key intrinsics and features of HLSL. The initial posting of this project uses DXIL version 0.7 (beta), but will shortly be updated to DXIL v1.0 for release.
