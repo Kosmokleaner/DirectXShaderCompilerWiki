@@ -161,7 +161,7 @@ etc.).*
 
 ### Types:
 
-The expression \<type\> implies the type of the expression, the supported types
+The expression `<type>` implies the type of the expression, the supported types
 are those from the following list that are also present in the target shader
 model for the program:
 
@@ -182,12 +182,12 @@ The following routines enable all active lanes in the current wave to receive
 the value from the specified lane, effectively broadcasting it. The return value
 from an invalid lane is undefined.
 
-    \<type\> WaveReadLaneFirst( \<type\> expr )
+    <type> WaveReadLaneFirst( <type> expr )
 
 Returns the value of expr for the active lane of the current wave with the
 smallest index. The resulting value is thus uniform across the wave.
 
-    \<type\> WaveReadLaneAt( \<type\> expr, uint laneIndex)
+    <type> WaveReadLaneAt( <type> expr, uint laneIndex)
 
 Returns the value of expr for the given lane index within the current wave. The
 input lane index must be uniform across the wave. The resulting value is thus
@@ -222,7 +222,7 @@ like:
 
     result = countbits( waveBallot( bBit ) );
 
-
+-
     \<type\> WaveAllSum(\<type\> expr)
 
 Sums up the value of \<expr\> across all active lanes in the current wave, and
@@ -232,7 +232,7 @@ Example:
 
     float3 total = WaveAllSum( position ); // sum positions in wave
     float3 center = total/count; // compute average of these positions
-
+-
 
     \<type\> WaveAllProduct(\<type\> expr)
 
@@ -320,9 +320,9 @@ where the number of elements written per lane is either 1 or 0.
     buffer[appendOffset] = myData; // write to the offset location for this lane
 
 
-\<type\> WavePrefixProduct(\<type\> value )
+    <type> WavePrefixProduct( <type> value )
 
-Returns the product of all of the \<value\>s in the active lanes in this wave
+Returns the product of all of the <value>s in the active lanes in this wave
 with indices less than this lane.
 
 Example:
@@ -355,39 +355,26 @@ prefix sum to the current lane’s value.
 This code demonstrates use of the above routines to implement a compacted write
 to an ordered stream where the number of elements written varies per lane.
 
-bool doesThisLaneHaveAnAppendItem = (NumberOfItemsToAppend) ? 1 : 0;
+    bool doesThisLaneHaveAnAppendItem = (NumberOfItemsToAppend) ? 1 : 0;
 
-// compute number of items to append for the whole wave
+    // compute number of items to append for the whole wave
+    uint appendCount = WaveAllCountBits( doesThisLaneHaveAnAppendItem );
 
-uint appendCount = WaveAllCountBits( doesThisLaneHaveAnAppendItem );
+    // compute number of locations filled before this one
+    uint laneAppendOffset = WavePrefixSum( NumberOfItemsToAppend );
 
-// compute number of locations filled before this one
+    // update the output location for this whole wave
+    uint appendOffset;
+    if ( WaveIsFirstLane() ) // execute only once per wave
+    {
+        // this way, we only issue one atomic for the entire wave, which reduces contention
+        // and keeps the output data for each lane in this wave together in the output buffer
 
-uint laneAppendOffset = WavePrefixSum( NumberOfItemsToAppend );
-
-// update the output location for this whole wave
-
-uint appendOffset;
-
-if ( WaveIsFirstLane() ) // execute only once per wave
-
-{
-
-// this way, we only issue one atomic for the entire wave, which reduces
-contention
-
-// and keeps the output data for each lane in this wave together in the output
-buffer
-
-appendOffset = atomicAdd(bufferSize, appendCount);
-
-}
-
-appendOffset = WaveReadFirstLane(appendOffset); // broadcast value
-
-appendOffset += laneAppendOffset; // and add in the offset for this lane
-
-buffer[appendOffset] = myData; // write to the offset location for this lane
+        appendOffset = atomicAdd(bufferSize, appendCount);
+    }
+    appendOffset = WaveReadFirstLane(appendOffset); // broadcast value
+    appendOffset += laneAppendOffset; // and add in the offset for this lane
+    buffer[appendOffset] = myData; // write to the offset location for this lane
 
 ### Quad-Wide Shuffle Operations
 
@@ -396,9 +383,7 @@ contain pixel shader quads as defined here. The indices of the pixels in the
 quad are defined in scan-line or reading order:
 
 >   X --\>
-
 Y \| [0] [1]
-
 >   v [2] [3]
 
 Where the coordinates are [0] is at x,y, [1] is at [x+1,y], [2] is at [x, y+1],
@@ -417,22 +402,22 @@ intrinsics in that sense.
 These routines assume that flow control execution is uniform at least across the
 quad.
 
-\<type\> QuadReadAcrossX( \<type\> localValue )
+    <type> QuadReadAcrossX( <type> localValue )
 
 Returns the specified local value read from the other lane in this quad in the X
 direction.
 
-\<type\> QuadReadAcrossY( \<type\> localValue )
+    <type> QuadReadAcrossY( <type> localValue )
 
 Returns the specified local value read from the other lane in this quad in the Y
 direction.
 
-\<type\> QuadReadAcrossDiagonal( \<type\> localValue )
+    <type> QuadReadAcrossDiagonal( <type> localValue )
 
 Returns the specified local value which is read from the diagonally opposite
 lane in this quad.
 
-\<type\> QuadReadLaneAt( \<type\> sourceValue, uint quadLaneID )
+    <type> QuadReadLaneAt( <type> sourceValue, uint quadLaneID )
 
 Returns the specified source value from the lane identified by quadLaneID within
 the current quad.
