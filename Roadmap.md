@@ -11,11 +11,11 @@ Here is a summary of the key points:
 * References
 * Unions
 * Function Templates
-* Visbility: 'public, private, protected, friend'
+* Visbility: `public, private, protected, friend`
 * Generic resource addressing
 
 ## Stretch language features
-* 'constexpr'
+* `constexpr`
 * Assertions
 * Function pointers (limited)
 * Lambdas (limited)
