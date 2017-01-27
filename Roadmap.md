@@ -32,7 +32,7 @@ Here is a summary of the key points:
 * Garbage collection
 
 ## Candidate hardware features
-* Explicit float16/"half" type
+* Explicit float16/`half` type
 * Blender intrinsics
 * More atomic operations
 * Stereo system values (SV_XXXX)
