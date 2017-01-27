@@ -23,7 +23,7 @@ Here is a summary of the key points:
 * Constructors, destructors, etc.
 * Extern functions (linking)
 
-## Out of Scope language features
+## Out-of-scope language features
 * Exceptions
 * A stack
 * Recursion
