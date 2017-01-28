@@ -1,6 +1,6 @@
 The current status of this project is at v0.7 (pre-release). The project will transition to 1.0 (official release) shortly.
-The shader language supported in this project is intended to match HLSL fxc shader model 5.1 to simplify adoption and initial testing.
 
+The shader language HLSL 2016 (ie shader model 6.0) supported in this project is intended to match HLSL fxc shader model 5.1 to simplify initial adoption and testing.
 Support for advanced language features such as those supported by clang would appear in a future shader model.
 
 The long term plan for this project was originally announced last March at GDC 2016.
@@ -10,6 +10,7 @@ A PDF of the [slides](http://1drv.ms/1T8iew9) is also available on that page.
 Here is a summary of the key points:
 
 ## Backlog of candidate language features
+The following language features could be added to the front-end with no impact on core functionality, drivers, or hardware:
 * Enums
 * Bit-fields
 * Language Standard Annotations
@@ -20,6 +21,7 @@ Here is a summary of the key points:
 * Generic resource addressing
 
 ## Stretch language features
+These features are under consideration for longer timeframes depending on user requests.
 * `constexpr`
 * Assertions
 * Function pointers (limited)
@@ -29,6 +31,7 @@ Here is a summary of the key points:
 * Extern functions (linking)
 
 ## Out-of-scope language features
+There are currently no plans to implement these features in the language.
 * Exceptions
 * A stack
 * Recursion
@@ -37,6 +40,7 @@ Here is a summary of the key points:
 * Garbage collection
 
 ## Candidate hardware features
+These are examples of changes to the language that require to changes in the hardware, and so will require updates to the underlying implementation.
 * Explicit float16/`half` type
 * Blender intrinsics
 * More atomic operations
