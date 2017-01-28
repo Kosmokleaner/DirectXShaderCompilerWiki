@@ -1,4 +1,9 @@
-The plan for this project was originally announced last March at GDC 2016.
+The current status of this project is at v0.7 (pre-release). The project will transition to 1.0 (official release) shortly.
+The shader language supported in this project is intended to match HLSL fxc shader model 5.1 to simplify adoption and initial testing.
+
+Support for advanced language features such as those supported by clang would appear in a future shader model.
+
+The long term plan for this project was originally announced last March at GDC 2016.
 The presentation video is [here.](https://www.youtube.com/watch?v=dcDDvoauaz0&t=351s)
 A PDF of the [slides](http://1drv.ms/1T8iew9) is also available on that page.
 
