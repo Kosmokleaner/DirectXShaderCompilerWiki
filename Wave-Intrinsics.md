@@ -100,7 +100,7 @@ is executing.
 
 ### Wave Query Intrinsics:
 
-    bool WaveIsFirstLane()
+##`bool WaveIsFirstLane()`
 
 This result returns true only for the active lane in the current wave with the
 smallest index. It can be used to identify operations that are to be executed
