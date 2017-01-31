@@ -1,4 +1,4 @@
-The current status of this project is at v0.7 (pre-release). The project will transition to 1.0 (official release) shortly. The [branch for v1.0](https://github.com/Microsoft/DirectXShaderCompiler/tree/dxil-v1.0) is created but is not master yet: 
+The current status of this project is at v0.7 (pre-release). The project will transition to 1.0 (official release) shortly. The [branch for v1.0](https://github.com/Microsoft/DirectXShaderCompiler/tree/dxil-v1.0) is created but is not master yet.
 
 The shader language supported in this project HLSL 2016 (ie shader model 6.0) is intended to match the existing HLSL shader model 5.1 to simplify initial adoption and testing.
 Support for advanced language features such as those supported by clang would appear in a future shader model.
