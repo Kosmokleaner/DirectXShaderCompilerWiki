@@ -385,8 +385,8 @@ contain pixel shader quads as defined here. The indices of the pixels in the
 quad are defined in scan-line or reading order:
 
 *   +---------\> X
-*   \ \|   [0] [1]
-*   \ \|   [2] [3]
+*   \|   [0] [1]
+*   \|   [2] [3]
 *   V
 *   Y
 
