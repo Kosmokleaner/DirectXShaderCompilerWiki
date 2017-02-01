@@ -305,7 +305,7 @@ following pseudo code:
 Use `WavePrefixCountBits()` to implement a compacted write to an ordered stream
 where the number of elements written per lane is either 1 or 0.
 
-    bool bDoesThisLaneHaveAnAppendItem = \<expr\>;
+    bool bDoesThisLaneHaveAnAppendItem = <expr>;
     // compute number of items to append for the whole wave
     uint laneAppendOffset = WavePrefixCountBits( bDoesThisLaneHaveAnAppendItem );
     uint appendCount = WaveAllCountBits( bDoesThisLaneHaveAnAppendItem);
