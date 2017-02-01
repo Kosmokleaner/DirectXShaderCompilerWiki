@@ -384,9 +384,9 @@ These intrinsics perform swap operations on the values across a wave known to
 contain pixel shader quads as defined here. The indices of the pixels in the
 quad are defined in scan-line or reading order:
 
-*   X ---------\>  X
-*    \|   [0] [1]
-*    \|   [2] [3]
+*   +---------\> X
+*   \ \|   [0] [1]
+*   \ \|   [2] [3]
 *   V
 *   Y
 
