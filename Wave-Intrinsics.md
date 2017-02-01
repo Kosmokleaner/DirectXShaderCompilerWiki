@@ -100,7 +100,7 @@ is executing.
 
 ### Wave Query Intrinsics:
 
-####    bool WaveIsFirstLane()
+####`bool WaveIsFirstLane()`
 
 This result returns true only for the active lane in the current wave with the
 smallest index. It can be used to identify operations that are to be executed
@@ -125,7 +125,7 @@ Example:
 *Note: the result returned from this routine may vary significantly depending on
 the implementation (vendor, generation, architecture, etc.).*
 
-####    uint WaveGetLaneIndex()
+####`uint WaveGetLaneIndex()`
 
 Returns the index of the current lane within the current wave. The result must
 be in the [0, WaveGetLaneCount) range.
@@ -135,7 +135,7 @@ be in the [0, WaveGetLaneCount) range.
 This set of intrinsics compare values across threads currently active from the
 current wave.
 
-####    bool WaveAnyTrue( bool expr )
+####`bool WaveAnyTrue( bool expr )`
 
 Returns true if \<expr\> is true in any active lane in the current wave.
 
@@ -182,12 +182,12 @@ The following routines enable all active lanes in the current wave to receive
 the value from the specified lane, effectively broadcasting it. The return value
 from an invalid lane is undefined.
 
-    <type> WaveReadLaneFirst( <type> expr )
+####`<type> WaveReadLaneFirst( <type> expr )`
 
 Returns the value of expr for the active lane of the current wave with the
 smallest index. The resulting value is thus uniform across the wave.
 
-    <type> WaveReadLaneAt( <type> expr, uint laneIndex)
+####`<type> WaveReadLaneAt( <type> expr, uint laneIndex)`
 
 Returns the value of expr for the given lane index within the current wave. The
 input lane index must be uniform across the wave. The resulting value is thus
@@ -200,18 +200,18 @@ These intrinsics compute the specified operation across all active lanes in the
 wave and broadcast the final result to all active lanes. Therefore, the final
 output is guaranteed uniform across the wave.
 
-    bool WaveAllEqual(<type> expr )
+####`bool WaveAllEqual(<type> expr )`
 
 Returns true if \<expr\> is the same for every active lane in the current wave
 (and thus uniform across it).
 
-    bool WaveAllEqualBool( bool expr )
+####`bool WaveAllEqualBool( bool expr )`
 
 Returns true if \<expr\> is the same for every active lane in the current wave
 (and thus uniform across it). Input is a boolean. Performance is higher than the
 nonBool version WaveAllEqual();
 
-    uint WaveAllCountBits( bool bBit )
+####`uint WaveAllCountBits( bool bBit )`
 
 Counts the number of Boolean variables (bBit) which evaluate to true across all
 active lanes in the current wave, and replicates the result to all lanes in the
@@ -222,9 +222,8 @@ like:
 
     result = countbits( waveBallot( bBit ) );
 
-_
 
-    <type> WaveAllSum( <type> expr )
+####`<type> WaveAllSum( <type> expr )`
 
 Sums up the value of \<expr\> across all active lanes in the current wave, and
 replicates it to all lanes in said wave. The order of operations is undefined.
@@ -233,30 +232,30 @@ Example:
 
     float3 total = WaveAllSum( position ); // sum positions in wave
     float3 center = total/count; // compute average of these positions
--
 
-    <type> WaveAllProduct( <type> expr)
+
+####`<type> WaveAllProduct( <type> expr)`
 
 Multiplies the values of \<expr\> together across all active lanes in the
 current wave and replicates it back to all active lanes. The order of operations
 is undefined.
 
-    <int_type> WaveAllBitAnd( <int_type> expr)
+####`<int_type> WaveAllBitAnd( <int_type> expr)`
 
 Returns the bitwise AND of all the values of \<expr\> across all active lanes in
 the current wave and replicates it back to all active lanes.
 
-    <int_type> WaveAllBitOr( <int_type> expr )
+####`<int_type> WaveAllBitOr( <int_type> expr )`
 
 Returns the bitwise OR of all the values of \<expr\> across all active lanes in
 the current wave and replicates it back to all active lanes.
 
-    <int_type> WaveAllBitXor( <int_type> expr)
+####`<int_type> WaveAllBitXor( <int_type> expr)`
 
 Returns the bitwise Exclusive OR of all the values of \<expr\> across all active
 lanes in the current wave and replicates it back to all active lanes.
 
-    <type> WaveAllMin( <type> expr)
+####`<type> WaveAllMin( <type> expr)`
 
 Computes minimum value of \<expr\> across all active lanes in the current wave
 and replicates it back to all active lanes. The order of operations is
@@ -267,8 +266,8 @@ Example:
     float3 minPos = WaveAllMin( myPoint.position );
     BoundingBox.min = min( minPos, BoundingBox.min );
 
--
-    <type> WaveAllMax( <type> expr);
+
+####`<type> WaveAllMax( <type> expr);`
 
 Computes maximum value of \<expr\> across all active lanes in the current wave
 and replicates it back to all active lanes. The order of operations is
