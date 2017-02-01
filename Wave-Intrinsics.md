@@ -145,7 +145,7 @@ Returns true if \<expr\> is true in all active lanes in the current wave.
 
 ####`uint4 WaveBallot( bool expr )`
 
-Returns an int4 as a bitmask of the evaluation of the Boolean \<expr\> for all
+Returns a uint4 containing a bitmask of the evaluation of the Boolean \<expr\> for all
 active lanes in the current wave. The least-significant bit corresponds to the
 lane with index zero. The bits corresponding to inactive lanes will be zero. The
 bits that are greater than or equal to WaveGetLaneCount will be zero.
@@ -157,7 +157,7 @@ Example:
 
 *Note: the number of bits set in the result of this routine may vary
 significantly depending on the implementation (vendor, generation, architecture,
-etc.).*
+etc.), so should not be relied on for portable code*
 
 ### Types:
 
