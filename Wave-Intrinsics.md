@@ -100,7 +100,7 @@ is executing.
 
 ### Wave Query Intrinsics:
 
-###`bool WaveIsFirstLane()`
+####`bool WaveIsFirstLane()`
 
 This result returns true only for the active lane in the current wave with the
 smallest index. It can be used to identify operations that are to be executed
@@ -113,7 +113,7 @@ Example:
         . . . // once per-wave code
     }
 
-`uint WaveGetLaneCount()`
+####`uint WaveGetLaneCount()`
 
 Returns the number of lanes in a wave on this architecture. The result will be
 between 4 and 128. Includes all lanes (active, inactive and/or helper lanes).
@@ -125,7 +125,7 @@ Example:
 *Note: the result returned from this routine may vary significantly depending on
 the implementation (vendor, generation, architecture, etc.).*
 
-    uint WaveGetLaneIndex()
+####`uint WaveGetLaneIndex()`
 
 Returns the index of the current lane within the current wave. The result must
 be in the [0, WaveGetLaneCount) range.
@@ -135,15 +135,15 @@ be in the [0, WaveGetLaneCount) range.
 This set of intrinsics compare values across threads currently active from the
 current wave.
 
-    bool WaveAnyTrue( bool expr )
+####`bool WaveAnyTrue( bool expr )`
 
 Returns true if \<expr\> is true in any active lane in the current wave.
 
-    bool WaveAllTrue( bool expr )
+####`bool WaveAllTrue( bool expr )`
 
 Returns true if \<expr\> is true in all active lanes in the current wave.
 
-    uint4 WaveBallot( bool expr )
+####`uint4 WaveBallot( bool expr )`
 
 Returns an int4 as a bitmask of the evaluation of the Boolean \<expr\> for all
 active lanes in the current wave. The least-significant bit corresponds to the
