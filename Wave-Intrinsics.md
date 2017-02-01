@@ -100,7 +100,7 @@ is executing.
 
 ### Wave Query Intrinsics:
 
-####`bool WaveIsFirstLane()`
+####    bool WaveIsFirstLane()
 
 This result returns true only for the active lane in the current wave with the
 smallest index. It can be used to identify operations that are to be executed
@@ -125,7 +125,7 @@ Example:
 *Note: the result returned from this routine may vary significantly depending on
 the implementation (vendor, generation, architecture, etc.).*
 
-####`uint WaveGetLaneIndex()`
+####    uint WaveGetLaneIndex()
 
 Returns the index of the current lane within the current wave. The result must
 be in the [0, WaveGetLaneCount) range.
@@ -135,7 +135,7 @@ be in the [0, WaveGetLaneCount) range.
 This set of intrinsics compare values across threads currently active from the
 current wave.
 
-####`bool WaveAnyTrue( bool expr )`
+####    bool WaveAnyTrue( bool expr )
 
 Returns true if \<expr\> is true in any active lane in the current wave.
 
