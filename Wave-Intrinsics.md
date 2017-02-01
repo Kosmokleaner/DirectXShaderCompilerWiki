@@ -387,7 +387,7 @@ quad are defined in scan-line or reading order:
 *   +---------\> X
 *   \|   [0] [1]
 *   \|   [2] [3]
-*   V
+*   v
 *   Y
 
 Where the coordinates are [0] is at x,y, [1] is at [x+1,y], [2] is at [x, y+1],
