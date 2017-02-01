@@ -215,9 +215,9 @@ nonBool version WaveAllEqual();
 
 Counts the number of Boolean variables (bBit) which evaluate to true across all
 active lanes in the current wave, and replicates the result to all lanes in the
-wave. Providing an explicit true Boolean counts the number of active lanes.
+wave. Providing an explicit `true` Boolean value returns the number of active lanes.
 
-This can be implemented more efficiently than a full WaveAllSum via something
+This can be implemented more efficiently than a full `WaveAllSum()` via something
 like:
 
     result = countbits( waveBallot( bBit ) );
