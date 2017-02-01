@@ -287,7 +287,7 @@ returns for each lane the sum of elements up to but not including that lane.
 Note: Postfix versions of the Prefix routines can be implemented by adding in
 the current lane’s value.
 
-    uint WavePrefixCountBits( Bool bBit )
+####`uint WavePrefixCountBits( Bool bBit )`
 
 Returns the sum of all the specified Boolean variables (bBit) set to true across
 all active lanes with indices smaller than this lane’s. A postfix version is
@@ -320,9 +320,9 @@ where the number of elements written per lane is either 1 or 0.
     appendOffset = WaveReadFirstLane( appendOffset ); // broadcast value
     appendOffset += laneAppendOffset; // and add in the offset for this lane
     buffer[appendOffset] = myData; // write to the offset location for this lane
--
 
-    <type> WavePrefixProduct( <type> value )
+
+####`<type> WavePrefixProduct( <type> value )`
 
 Returns the product of all of the <value>s in the active lanes in this wave
 with indices less than this lane.
@@ -337,7 +337,7 @@ The order of operations on this routine cannot be guaranteed, so effectively the
 [precise] flag is ignored within it. A postfix product can be computed by
 multiplying the prefix product by the current lane’s value.
 
-    <type> WavePrefixSum( <type> value )
+####`<type> WavePrefixSum( <type> value )`
 
 Returns the sum of all of the \<value\>s in the active lanes of this wave having
 indices less than this one.
@@ -404,22 +404,22 @@ intrinsics in that sense.
 These routines assume that flow control execution is uniform at least across the
 quad.
 
-    <type> QuadReadAcrossX( <type> localValue )
+####`<type> QuadReadAcrossX( <type> localValue )`
 
 Returns the specified local value read from the other lane in this quad in the X
 direction.
 
-    <type> QuadReadAcrossY( <type> localValue )
+####`<type> QuadReadAcrossY( <type> localValue )`
 
 Returns the specified local value read from the other lane in this quad in the Y
 direction.
 
-    <type> QuadReadAcrossDiagonal( <type> localValue )
+####`<type> QuadReadAcrossDiagonal( <type> localValue )`
 
 Returns the specified local value which is read from the diagonally opposite
 lane in this quad.
 
-    <type> QuadReadLaneAt( <type> sourceValue, uint quadLaneID )
+####`<type> QuadReadLaneAt( <type> sourceValue, uint quadLaneID )`
 
 Returns the specified source value from the lane identified by quadLaneID within
 the current quad.
