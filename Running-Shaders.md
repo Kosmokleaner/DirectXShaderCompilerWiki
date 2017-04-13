@@ -1,8 +1,8 @@
 To run shaders compiled as DXIL, you will need support from the operating system as well as from the driver for your graphics adapter.
 This [link](https://github.com/Microsoft/DirectXShaderCompiler/wiki/Requirements-for-Operation) lists the components required for operation.
 
-While support for retail DXIL is available across Windows 10 today, prototype drivers use Experimental Mode which requires the [Windows 10 Creators Update](https://www.microsoft.com/en-us/software-download/windows10?ranMID=24542&ranEAID=TnL5HPStwNw&ranSiteID=TnL5HPStwNw-ydKo1P0j6OJwADi7QUCfLg&tduid=(34190da320062734ab35e1018dc7f8bd)(256380)(2459594)(TnL5HPStwNw-ydKo1P0j6OJwADi7QUCfLg)())
-or any [Windows 10 Insider Preview Build 15007](https://blogs.windows.com/windowsexperience/2017/01/12/announcing-windows-10-insider-preview-build-15007-pc-mobile/#XqlQ5FZfXw5WVhpS.97) or later.
+While support for retail DXIL is available across Windows 10 today, production drivers expose the new capability via experimental mode which requires the [Windows 10 Creators Update](https://www.microsoft.com/en-us/software-download/windows10?ranMID=24542&ranEAID=TnL5HPStwNw&ranSiteID=TnL5HPStwNw-ydKo1P0j6OJwADi7QUCfLg&tduid=(34190da320062734ab35e1018dc7f8bd)(256380)(2459594)(TnL5HPStwNw-ydKo1P0j6OJwADi7QUCfLg)())
+(or any [Windows 10 Insider Preview Build 15007](https://blogs.windows.com/windowsexperience/2017/01/12/announcing-windows-10-insider-preview-build-15007-pc-mobile/#XqlQ5FZfXw5WVhpS.97) or later).
 
 Drivers indicate support DXIL by reporting support for Shader Model 6, possibly in experimental mode. To enable support in these cases, the [Developer Mode setting](https://msdn.microsoft.com/windows/uwp/get-started/enable-your-device-for-development) must be enabled.
 
