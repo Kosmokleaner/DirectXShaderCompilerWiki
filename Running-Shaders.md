@@ -12,7 +12,7 @@ The following vendors provide drivers with hardware GPU support for DXIL:
 
 NVIDIA's new r381 drivers (r381.65 and later) provide experimental mode support for DXIL 1.0 and Shader Model 6.0. This feature is considered beta at this time and intended to enable developers to try out DXIL and the new Shader Model 6.0 features -- Wave Math and Int64. Here are the [release notes.](http://us.download.nvidia.com/Windows/381.65/381.65-win10-win8-win7-desktop-release-notes.pdf), and a [download link](http://uk.download.nvidia.com/Windows/381.65/381.65-desktop-win10-64bit-international-whql.exe).
 
-AMD has released a production driver with experimental mode support for DXIL and Shader Model 6: [Radeon Software Crimson ReLive Edition 17.3.1](https://community.amd.com/docs/DOC-1771). It uses and requires DXIL v1.0. Using this driver, all of the execution tests pass except for the 2 wave intrinsics tests. This capability is also provided in the update, [Radeon Software Crimson ReLive Edition 17.3.2](http://support.amd.com/en-us/kb-articles/Pages/Radeon-Software-Crimson-ReLive-Edition-17.3.2-Release-Notes.aspx).
+AMD's latest production driver with support for DXIL 1.0 and Shader Model 6 in experimental mode is: [Radeon Software Crimson ReLive Edition 17.4.2](http://support.amd.com/en-us/kb-articles/Pages/Radeon-Software-Crimson-ReLive-Edition-17.4.2-Release-Notes.aspx).
 
 ### Software Rendering
 
