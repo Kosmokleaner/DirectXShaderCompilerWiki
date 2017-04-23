@@ -245,7 +245,7 @@ is undefined.
 Returns the bitwise AND of all the values of \<expr\> across all active lanes in
 the current wave and replicates it back to all active lanes.
 
-#### `<int_type> WaveAllBitOr( <int_type> expr )`
+#### `<int_type> WaveActiveBitOr( <int_type> expr )`
 
 Returns the bitwise OR of all the values of \<expr\> across all active lanes in
 the current wave and replicates it back to all active lanes.
