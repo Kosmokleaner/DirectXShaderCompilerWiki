@@ -135,15 +135,15 @@ be in the [0, WaveGetLaneCount) range.
 This set of intrinsics compare values across threads currently active from the
 current wave.
 
-#### `bool WaveAnyTrue( bool expr )`
+#### `bool WaveActiveAnyTrue( bool expr )`
 
 Returns true if \<expr\> is true in any active lane in the current wave.
 
-#### `bool WaveAllTrue( bool expr )`
+#### `bool WaveActiveAllTrue( bool expr )`
 
 Returns true if \<expr\> is true in all active lanes in the current wave.
 
-#### `uint4 WaveBallot( bool expr )`
+#### `uint4 WaveActiveBallot( bool expr )`
 
 Returns a uint4 containing a bitmask of the evaluation of the Boolean \<expr\> for all
 active lanes in the current wave. The least-significant bit corresponds to the
@@ -200,47 +200,47 @@ These intrinsics compute the specified operation across all active lanes in the
 wave and broadcast the final result to all active lanes. Therefore, the final
 output is guaranteed uniform across the wave.
 
-#### `bool WaveAllEqual(<type> expr )`
+#### `bool WaveActiveAllEqual(<type> expr )`
 
 Returns true if \<expr\> is the same for every active lane in the current wave
 (and thus uniform across it).
 
-#### `bool WaveAllEqualBool( bool expr )`
+#### `bool WaveActiveAllEqualBool( bool expr )`
 
 Returns true if \<expr\> is the same for every active lane in the current wave
 (and thus uniform across it). Input is a boolean. Performance is higher than the
-nonBool version WaveAllEqual();
+nonBool version WaveActiveAllEqual();
 
-#### `uint WaveAllCountBits( bool bBit )`
+#### `uint WaveActiveCountBits( bool bBit )`
 
 Counts the number of Boolean variables (bBit) which evaluate to true across all
 active lanes in the current wave, and replicates the result to all lanes in the
 wave. Providing an explicit `true` Boolean value returns the number of active lanes.
 
-This can be implemented more efficiently than a full `WaveAllSum()` via something
+This can be implemented more efficiently than a full `WaveActiveSum()` via something
 like:
 
     result = countbits( waveBallot( bBit ) );
 
 
-#### `<type> WaveAllSum( <type> expr )`
+#### `<type> WaveActiveSum( <type> expr )`
 
 Sums up the value of \<expr\> across all active lanes in the current wave, and
 replicates it to all lanes in said wave. The order of operations is undefined.
 
 Example:
 
-    float3 total = WaveAllSum( position ); // sum positions in wave
+    float3 total = WaveActiveSum( position ); // sum positions in wave
     float3 center = total/count; // compute average of these positions
 
 
-#### `<type> WaveAllProduct( <type> expr)`
+#### `<type> WaveActiveProduct( <type> expr)`
 
 Multiplies the values of \<expr\> together across all active lanes in the
 current wave and replicates it back to all active lanes. The order of operations
 is undefined.
 
-#### `<int_type> WaveAllBitAnd( <int_type> expr)`
+#### `<int_type> WaveActiveBitAnd( <int_type> expr)`
 
 Returns the bitwise AND of all the values of \<expr\> across all active lanes in
 the current wave and replicates it back to all active lanes.
@@ -250,12 +250,12 @@ the current wave and replicates it back to all active lanes.
 Returns the bitwise OR of all the values of \<expr\> across all active lanes in
 the current wave and replicates it back to all active lanes.
 
-#### `<int_type> WaveAllBitXor( <int_type> expr)`
+#### `<int_type> WaveActiveBitXor( <int_type> expr)`
 
 Returns the bitwise Exclusive OR of all the values of \<expr\> across all active
 lanes in the current wave and replicates it back to all active lanes.
 
-#### `<type> WaveAllMin( <type> expr)`
+#### `<type> WaveActiveMin( <type> expr)`
 
 Computes minimum value of \<expr\> across all active lanes in the current wave
 and replicates it back to all active lanes. The order of operations is
@@ -263,11 +263,11 @@ undefined.
 
 Example:
 
-    float3 minPos = WaveAllMin( myPoint.position );
+    float3 minPos = WaveActiveMin( myPoint.position );
     BoundingBox.min = min( minPos, BoundingBox.min );
 
 
-#### `<type> WaveAllMax( <type> expr);`
+#### `<type> WaveActiveMax( <type> expr);`
 
 Computes maximum value of \<expr\> across all active lanes in the current wave
 and replicates it back to all active lanes. The order of operations is
@@ -275,7 +275,7 @@ undefined.
 
 Example:
 
-    float3 maxPos = WaveAllMax( myPoint.position );
+    float3 maxPos = WaveActiveMax( myPoint.position );
     BoundingBox.max = max( maxPos, BoundingBox.max );
 
 
@@ -308,7 +308,7 @@ where the number of elements written per lane is either 1 or 0.
     bool bDoesThisLaneHaveAnAppendItem = <expr>;
     // compute number of items to append for the whole wave
     uint laneAppendOffset = WavePrefixCountBits( bDoesThisLaneHaveAnAppendItem );
-    uint appendCount = WaveAllCountBits( bDoesThisLaneHaveAnAppendItem);
+    uint appendCount = WaveActiveCountBits( bDoesThisLaneHaveAnAppendItem);
     // update the output location for this whole wave
     uint appendOffset;
     if ( WaveIsFirstLane () )
@@ -360,7 +360,7 @@ to an ordered stream where the number of elements written varies per lane.
     bool doesThisLaneHaveAnAppendItem = (NumberOfItemsToAppend) ? 1 : 0;
 
     // compute number of items to append for the whole wave
-    uint appendCount = WaveAllCountBits( doesThisLaneHaveAnAppendItem );
+    uint appendCount = WaveActiveCountBits( doesThisLaneHaveAnAppendItem );
 
     // compute number of locations filled before this one
     uint laneAppendOffset = WavePrefixSum( NumberOfItemsToAppend );
