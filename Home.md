@@ -40,13 +40,6 @@ You can find documentation for this project in the docs/ directory. These contai
 * [tools/clang/docs/UsingDxc.rst](https://github.com/Microsoft/DirectXShaderCompiler/blob/master/tools/clang/docs/UsingDxc.rst):
  this file contains a user guide for dxc.exe
 
-## License
-
-DirectX Shader Compiler is distributed under the terms of the MIT license.
-
-See [LICENSE-MIT](https://github.com/Microsoft/DirectXShaderCompiler/blob/master/LICENSE-MIT)
-and [COPYRIGHT](https://github.com/Microsoft/DirectXShaderCompiler/blob/master/COPYRIGHT) for details.
-
 ## Code of Conduct
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
