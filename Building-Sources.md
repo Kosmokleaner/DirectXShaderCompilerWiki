@@ -1,26 +1,65 @@
-Before you build, you will need to have some additional software installed.
+# Getting Ready to Build
+
+Before you build, you will need to have some additional software installed. This section provides the most streamlined configuration, based on Visual Studio 2017 - other configurations are available.
 
 * [Git](http://git-scm.com/downloads).
-* [Visual Studio 2015](https://www.visualstudio.com/downloads). Update 3 is the supported version. This will install the Windows Development Kit as a side effect. We also need the common tools for visual C++ to get the atl headers (e.g. atlbase.h). In the install options, make sure the following options are checked:
-    * Windows 10 SDK (10.0.10240.0)
-    * Common Tools for Visual C++ 2015
-* [Windows 10 SDK](https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk). This is needed to build tests that reference the D3D12 runtime.
-* [Windows Driver Kit](https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit). Or download and install the [Windows Driver Kit 8.1 Update 1](http://www.microsoft.com/en-us/download/details.aspx?id=42273), no need to download and install tests. This will target your common Windows Kits path, on a 64-bit machine this will likely be C:\Program Files (x86)\Windows Kits\8.1. WDK for Windows 10 should also work. This is currently needed to run TAEF tests and build with the TAEF framework.
-* [CMake](https://cmake.org/files/v3.4/cmake-3.4.3-win32-x86.exe). Version 3.4.3 is the supported version. You need not change your PATH variable during installation.
+* [Visual Studio 2017](https://www.visualstudio.com/downloads). Select the following workloads: Universal Windows Platform Development and Desktop Development with C++.
 * [Python](https://www.python.org/downloads/). Version 2.7.x is required, 3.x might work but it's not officially supported. You need not change your PATH variable during installation.
 
-To setup the build environment run the `utils\hct\hctstart.cmd` script passing the path to the source and build directories. For example:
+After cloning the project, you can set up a build environment shortcut by double-clicking the `utils\hct\hctshortcut.js` file. This will create a shortcut on your desktop with a default configuration.
 
-    git clone <DirectXShaderCompiler repo> C:\DirectXShaderCompiler
-    cd C:\DirectXShaderCompiler
-    utils\hct\hctstart.cmd C:\DirectXShaderCompiler C:\DirectXShaderCompiler.bin
+## Building
 
-To create a shortcut to the build environment with the default build directory, double-click on the `utils\hct\hctshortcut.js` file.
+Start by opening the HLSL console from the desktop shortcut or via `hctstart`.
 
-To build, open the HLSL Console and run this command.
+Tests are built using the TAEF framework. Unless you already have this, you should run the script at `utils\hct\hctgettaef.py` from your build environment before you start building to download and unzip them as an external dependency. You should only need to do this once.
+
+From an HLSL Console, run this command to build a solution and all projects.
 
     hctbuild
 
 You can also clean, build and run tests with this command.
 
-    hctcheckin 
+    hctcheckin
+
+After you have built a solution, you can open it in Visual Studio by running `hctvs`.
+
+# Other Configurations
+
+## Using hctstart
+
+To specify build environment options, run the `utils\hct\hctstart.cmd` script passing the path to the source and build directories. For example, if you cloned with `git clone https://github.com/Microsoft/DirectXShaderCompiler.git C:\DirectXShaderCompiler`, you can run the following to have the output in `C:\DirectXShaderCompiler.bin`.
+
+    utils\hct\hctstart.cmd C:\DirectXShaderCompiler C:\DirectXShaderCompiler.bin
+
+## Using SDK and WDK installations
+
+Visual Studio 2017 and Visual Studio 2015 Update 3 both include the ability to install a supported Windows SDK.
+The [Windows 10 SDK](https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk) is needed to build tests that reference the D3D12 runtime. You may get this as part of installing/updating Visual Studio.
+
+You can install TAEF via the script at `utils\hct\hctgettaef.py` from your build environment. Alternatively, install the [Windows Driver Kit](https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit). No need to download and install tests. This is used to build and run tests.
+
+## Using Visual Studio 2015
+
+The supported version of Visual Studio 2015 is Update 3. In the install options, make sure the following options are checked:
+
+ * Windows 10 SDK (version 14393)
+ * Common Tools for Visual C++ 2015
+
+Visual Studio 2017 provides CMake support, but you'll need to install version [3.4.3](https://cmake.org/files/v3.4/cmake-3.4.3-win32-x86.exe) or [3.7.2](https://cmake.org/files/v3.7/cmake-3.7.2-win32-x86.msi) if using Visual Studio 2015. You need not change your PATH variable during installation. 3.7.2 is needed to build with Visual Studio 2017.
+
+## Using Ninja
+
+To build with Ninja, please make sure that you have `ninja` and `cl` in your `%PATH%`.
+`ninja` can be installed from [here](https://github.com/ninja-build/ninja/releases);
+`cl` should already be installed together with Visual Studio and can be exported to `%PATH%` via the `vcvars*.bat` script in Visual Studio's VC build directory.
+
+To configure cmake with Ninja generator,
+
+    hctbuild -s -ninja
+
+To build with Ninja, go to the binary directory and run `ninja` directly or
+
+    hctbuild -b -ninja
+
+If you use Ninja to build the project, please make sure to supply `-ninja` to `hcttest` for testing.
