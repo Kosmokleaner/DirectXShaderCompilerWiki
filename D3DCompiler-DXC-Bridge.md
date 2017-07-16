@@ -10,7 +10,7 @@ d3dcompiler_47.dll is the most common DLL these days, but an app or game might b
 
 Some flags aren't implemented because they're not applicable or supported (D3DCOMPILE_ENABLE_BACKWARDS_COMPATIBILITY, D3DCOMPILE_ENABLE_STRICTNESS, D3DCOMPILE_PARTIAL_PRECISION). These are simply ignored in the bridge.
 
-The include handler functionality in dxcompiler has a significantly different design and can't really be reimplemented. The dxcompiler version of the handler has no memory of the history of calls and will return file-not-found if a file isn't found with a specific name. The d3dcompiler version instead had to track open/close pairs and reimplement rules for local and system includes. Because of this limitation, there is no support for using a custom include handler.
+The include handler functionality in dxcompiler has a significantly different design and can't really be reimplemented. The dxcompiler version of the handler has no memory of the history of calls and will return file-not-found if a file isn't found with a specific name. The d3dcompiler version instead had to track open/close pairs and reimplement rules for local and system includes. Because of this limitation, there is no support for using a custom include handler (see [this thread](https://github.com/Microsoft/DirectXShaderCompiler/issues/161) for more information).
 
 It's possible that we're missing some API call you care deeply about - if so, please file an Issue and we can discuss how to resolve your case.
 
