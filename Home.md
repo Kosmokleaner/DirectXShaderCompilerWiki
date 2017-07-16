@@ -40,6 +40,10 @@ You can find documentation for this project in the docs/ directory. These contai
 * [tools/clang/docs/UsingDxc.rst](https://github.com/Microsoft/DirectXShaderCompiler/blob/master/tools/clang/docs/UsingDxc.rst):
  this file contains a user guide for dxc.exe
 
+Additional documentation is available on the Wiki:
+
+* Extra programs, available only via the GitHub project: [[an interactive editor|dndxc]], [[assembler tool|dxa]], [[optimizer tool|dxopt]], [[validator tool|dxv]], and [[d3dcompiler bridge DLL|d3dcompiler-dxc-bridge]].
+
 ## Code of Conduct
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
