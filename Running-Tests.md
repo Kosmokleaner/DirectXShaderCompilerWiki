@@ -16,4 +16,4 @@ If you want to run file check on a directory, pass `compat-suite` with path like
 
      `hcttest compat-suite "..\CodeGenHLSL\shader-compat-suite\lib_arg_flatten"`
 
-By default, hcttest will run file check on tools\clang\test\CodeGenHLSL\shader-compat-suite. Add new tests to shader-compat-suite are welcome.
+By default, hcttest will run file check on tools\clang\test\CodeGenHLSL\shader-compat-suite. Any files added to shader-compat-suite are run automatically. Feel free to add new tests to this directory.
