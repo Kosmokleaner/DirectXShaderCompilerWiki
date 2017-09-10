@@ -48,6 +48,22 @@ The supported version of Visual Studio 2015 is Update 3. In the install options,
 
 Visual Studio 2017 provides CMake support, but you'll need to install version [3.4.3](https://cmake.org/files/v3.4/cmake-3.4.3-win32-x86.exe) or [3.7.2](https://cmake.org/files/v3.7/cmake-3.7.2-win32-x86.msi) if using Visual Studio 2015. You need not change your PATH variable during installation. 3.7.2 is needed to build with Visual Studio 2017.
 
+## Using Visual Studio 2017
+
+You can build with vs2017 either on the command line or using the integrated [CMake support](https://blogs.msdn.microsoft.com/vcblog/2016/11/16/cmake-support-in-visual-studio-the-visual-studio-2017-rc-update/).
+
+To build from the command line follow the normal build steps, but pass `-vs2017` as a parameter to `hctbuild`.
+
+To build using the integrated CMake support, simply start Visual Studio and open the folder where you have the source. From the CMake menu select "Build CMakeLists.txt"
+
+By default the binaries will be built in %LOCALAPPDATA%\CMakeBuild\DirectXShaderCompiler\build\{build-flavor}.
+The build location can be changed by editing the `CMakeSettings.json` file.
+
+You can then use the build directory in the `hctstart` script to test the build. For example,
+
+    hctstart C:\source\DirectXShaderCompiler %LOCALAPPDATA%\CMakeBuild\DirectXShaderCompiler\build\x64-Debug
+
+
 ## Using Ninja
 
 To build with Ninja, please make sure that you have `ninja` and `cl` in your `%PATH%`.
