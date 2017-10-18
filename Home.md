@@ -43,6 +43,7 @@ You can find documentation for this project in the docs/ directory. These contai
 Additional documentation is available on the Wiki:
 
 * Extra programs, available only via the GitHub project: [[an interactive editor|dndxc]], [[assembler tool|dxa]], [[optimizer tool|dxopt]], [[validator tool|dxv]], and [[d3dcompiler bridge DLL|d3dcompiler-dxc-bridge]].
+* [[Releases]].
 
 ## Code of Conduct
 
