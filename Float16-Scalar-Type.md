@@ -30,7 +30,7 @@ HLSL Structure will follow natural alignment for scalar types. This is equivalen
 
 # Byte Address Buffer
 
-Currently byte address buffer can only load 'uint' scalar type. Starting with shader model 6.2, we will support templated Load methods to allow loading types like the following for scalars and vectors:
+Currently byte address buffer can only load 'uint' scalar type. Starting with shader model 6.2, we will support other Load methods to allow loading types like the following for scalars and vectors:
 
     float f1 = buffer.LoadFloat(idx);
     half4 h1 = buffer.LoadHalf4(idx);
