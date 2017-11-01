@@ -31,9 +31,9 @@ Currently byte address buffer can only load 'uint' scalar type. Starting with sh
 
 This change applies to half, float, int, and double scalar types.
 
-# Type Buffer
+# Type Buffer/Texture
 
-No changes in syntax. Half type will be interpreted as 16 bit scalars in memory.
+No changes. Half types will be interpreted as float16, not min16float.
     
 # Atomic Operations
 
