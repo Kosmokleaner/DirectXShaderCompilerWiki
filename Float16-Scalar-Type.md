@@ -47,7 +47,7 @@ All intrinsics and arithmetic operations that supported min16float previously wi
 - For signature packing, we are packing signature elements based on the width of the scalar type. This means float16 will never be packed with other scalar types of 4 bytes.
 Similar to the previous rule, each row for signature element still contains 4 elements max, regardless of size. We are also still constraining on the total number of rows to be 32 for now. 
 This can be changed in the future if people find this limit to be an issue.
-- For ByteAddressBuffer and Structured Buffer, Load operations will now map to rawBufferLoad with masks to specify which channels need to be loaded.
+- For ByteAddressBuffer and Structured Buffer, Load operations will now map to rawBufferLoad with masks to specify which channels need to be loaded. You can differentiate typed buffer load from raw buffer load from opcode.
 
 # Metadata Change
 
