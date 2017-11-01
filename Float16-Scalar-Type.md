@@ -41,7 +41,7 @@ No atomic operations for float16 are supported.
 
 # Intrinsics and Arithmetic Operations
 
-All intrinsics and arithmetic operations that supported min16float previously will support half types. Denormal numbers are preserved to zero.
+All intrinsics and arithmetic operations that supported min16float previously will support half types. Denormal numbers must be preserved.
 
 # DXIL Changes
 - For signature packing, we are packing signature elements based on the width of the scalar type. This means float16 will never be packed with other scalar types of 4 bytes.
