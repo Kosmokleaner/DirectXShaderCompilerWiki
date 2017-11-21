@@ -1,4 +1,4 @@
-Shader Model 6.2 is a superset of Shader Model 6.1.
+Shader Model 6.2 is a superset of [[Shader Model 6.1]].
 
 The main additions are as follows:
 * [[Float16 Scalar Type]]. As opposed to minfloat16, these values can be used with memory operations (that is, reading and writing via resources or groupshared memory).
