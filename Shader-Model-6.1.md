@@ -1,4 +1,4 @@
-Shader Model 6.1 is the first shader model that can be compiled with the DirectX Shader Compiler.
+Shader Model 6.1 is a superset of [[Shader Model 6.0]].
 
 The main additions are as follows:
 
