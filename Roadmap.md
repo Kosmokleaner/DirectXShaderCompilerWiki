@@ -1,6 +1,6 @@
-The current status of this project is past 1.0 (official release for Windows 10 Creator's Update Edition). We've continued to make improvements beyond the components that were made available with the corresponding SDK. 
+The current status of this project is past initial supported release. The first official release was for Windows 10 Creator's Update Edition. We've continued to make improvements beyond the components that were made available with the corresponding SDK. 
 
-The shader language supported in this project HLSL 2016 (ie shader model 6.0) is intended to match the existing HLSL shader model 5.1 to simplify initial adoption and testing.
+The shader language supported in this project HLSL 2016 and beyond, and shader model 6.0 and beyond. The language is intended to match the existing HLSL shader model 5.1 level of support to simplify initial adoption and testing.
 
 Support for advanced language features such as those supported by clang would appear in a future shader model.
 
@@ -12,7 +12,6 @@ Here is a summary of the key points:
 
 ## Backlog of candidate language features
 The following language features could be added to the front-end with no impact on core functionality, drivers, or hardware:
-* Enums
 * Bit-fields
 * Language Standard Annotations
 * References
@@ -29,7 +28,7 @@ These features are under consideration for longer timeframes depending on user r
 * Lambdas (limited)
 * Virtuals
 * Constructors, destructors, etc.
-* Extern functions (linking)
+* Extern functions (linking). This is partially implemented but it's not part of the DXIL standard, and so it's a tool-level-only support.
 
 ## Out-of-scope language features
 There are currently no plans to implement these features in the language.
@@ -42,10 +41,9 @@ There are currently no plans to implement these features in the language.
 
 ## Candidate hardware features
 These are examples of changes to the language that require to changes in the hardware, and so will require updates to the underlying implementation.
-* Explicit float16/`half` type
 * Blender intrinsics
 * More atomic operations
-* Stereo system values (SV_XXXX)
+* More wave-level operations
 * Programmable blending (aka RT Read)
 * Input of arbitrary structures
 * More control over IEEE behavior
