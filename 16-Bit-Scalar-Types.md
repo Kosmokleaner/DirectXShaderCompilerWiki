@@ -1,4 +1,4 @@
-# Float16
+# 16 Bit Scalars
 
 Starting with Shader Model 6.2, we are introducing true 16-bit scalar types with option /enable-16bit-types. If this mode is enabled, every min precision type is disabled and implicitly converted to its full scalar types.
 
