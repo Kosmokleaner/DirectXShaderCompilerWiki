@@ -18,13 +18,13 @@ artifacts into `<dxc-bin-dir>`:
 ```sh
 git clone git@github.com:Microsoft/DirectXShaderCompiler.git <dxc-src-dir>
 cd <dxc-src-dir>
-git submodule update --init --recursive
+git submodule update --init
 
 .\utils\hct\hctstart.cmd <dxc-src-dir> <dxc-bin-dir> # Set up environment
 .\utils\hct\hctbuild.cmd -spirv                      # Configure and build
 ```
 
-After successful building, the generated `dxc.exe` should have SPIR-V CodeGen
+If the build is successful, the generated `dxc.exe` should have SPIR-V CodeGen
 built in.
 
 ## Using
@@ -36,6 +36,10 @@ To translate HLSL source file `<hlsl-src-file>` into SPIR-V binary
 \path\to\dxc.exe -spirv <hlsl-src-file> -Fo <spirv-bin-file>
 ```
 
+Apart from the common command-line options like `-O`, `-Fo`, `-Fh`, there are
+a few Vulkan/SPIR-V specific [command-line options][vulkan-cl-options] that
+you can use and `dxc.exe -help` explains them.
+
 ## Contributing
 
 The SPIR-V CodeGen is mainly contributed and maintained by the @google/shaderc
@@ -44,13 +48,6 @@ team. But contributions to the SPIR-V CodeGen are definitely very welcome! :)
 In addition to the DirectXShaderCompiler [contributing
 guidelines][dxc-contribute], please also make sure to follow the following
 guidelines.
-
-### Project planning and issue tracking
-
-To avoid flooding the upstream repo with SPIR-V tasks and issues, we use the
-GitHub Projects and Issues pages in the [Google fork repo][google-fork]
-to manage tasks and track issues. Please make sure to report SPIR-V related
-issues there.
 
 ### Developing
 
@@ -63,14 +60,8 @@ When configuring, please make sure to enable building SPIR-V tests:
 
 ### Pull requests and code review
 
-All pull requests should be sent against the upstream repo. The Google fork
-repo is only meant for project planning and issue tracking; we do not intend to
-maintain a divergent fork. Code reviews will also happen in the upstream repo.
-Please make sure to request reviews from @antiagainst and @ehsannas.
-
 For each pull request, please make sure
 
-- You express your intent in the Google fork repo to avoid duplicate work.
 - Tests are written to cover the modifications.
 - [The HLSL to SPIR-V mapping doc][mapping-doc] is updated for newly supported
   features.
@@ -239,3 +230,4 @@ tests, while `htctest spirv_only` will only trigger SPIR-V tests.
 [spirv]: https://www.khronos.org/registry/spir-v
 [spirv-headers]: https://github.com/KhronosGroup/SPIRV-Headers
 [spirv-tools]: https://github.com/KhronosGroup/SPIRV-Tools
+[vulkan-cl-options]: https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/SPIR-V.rst#vulkan-command-line-options
