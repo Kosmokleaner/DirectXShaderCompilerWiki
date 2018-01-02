@@ -20,6 +20,9 @@ git clone git@github.com:Microsoft/DirectXShaderCompiler.git <dxc-src-dir>
 cd <dxc-src-dir>
 git submodule update --init
 
+# Run the following if Windows Driver Kit is not installed
+.\utils\hct\hctgettaef.py
+
 .\utils\hct\hctstart.cmd <dxc-src-dir> <dxc-bin-dir> # Set up environment
 .\utils\hct\hctbuild.cmd -spirv                      # Configure and build
 ```
