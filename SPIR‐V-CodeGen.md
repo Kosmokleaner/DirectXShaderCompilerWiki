@@ -21,7 +21,7 @@ cd <dxc-src-dir>
 git submodule update --init
 
 # Run the following if Windows Driver Kit is not installed
-.\utils\hct\hctgettaef.py
+python .\utils\hct\hctgettaef.py
 
 .\utils\hct\hctstart.cmd <dxc-src-dir> <dxc-bin-dir> # Set up environment
 .\utils\hct\hctbuild.cmd -spirv                      # Configure and build
