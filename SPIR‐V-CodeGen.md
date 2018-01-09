@@ -36,7 +36,8 @@ To translate HLSL source file `<hlsl-src-file>` into SPIR-V binary
 `<spirv-bin-file>`:
 
 ```sh
-\path\to\dxc.exe -spirv <hlsl-src-file> -Fo <spirv-bin-file>
+\path\to\dxc.exe -spirv -T <target-prfile> -E <entry-point>
+                 <hlsl-src-file> -Fo <spirv-bin-file>
 ```
 
 Apart from the common command-line options like `-O`, `-Fo`, `-Fh`, there are
