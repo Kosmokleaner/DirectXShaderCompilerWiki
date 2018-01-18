@@ -7,11 +7,7 @@ To use a driver in Windows 10 experimental mode, enable the [Developer Mode](htt
 
 ### Hardware Drivers:
 
-The following vendors provide drivers with hardware GPU support for DXIL:
-
-NVIDIA's new r381 drivers (r381.65 and later) provide experimental mode support for DXIL 1.0 and Shader Model 6.0. Here are the [release notes](http://us.download.nvidia.com/Windows/381.65/381.65-win10-win8-win7-desktop-release-notes.pdf), and a [download link](http://uk.download.nvidia.com/Windows/381.65/381.65-desktop-win10-64bit-international-whql.exe).
-
-AMD's latest driver with support for DXIL 1.0 and Shader Model 6 in experimental mode is [Radeon Software Crimson ReLive Edition 17.4.2](http://support.amd.com/en-us/kb-articles/Pages/Radeon-Software-Crimson-ReLive-Edition-17.4.2-Release-Notes.aspx).
+For the latest on supported hardware drivers, see the project [README.md](https://github.com/Microsoft/DirectXShaderCompiler/blob/master/README.md#running-shaders).
 
 ### Software Rendering
 
