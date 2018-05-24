@@ -5,7 +5,7 @@ CodeGen, and also how to contribute.
 For how HLSL features are mapped into SPIR-V, please see the [HLSL to SPIR-V
 mapping doc][mapping-doc].
 
-_Note_: SPIR-V CodeGen is still under development.
+_Note_: SPIR-V CodeGen is mature-ish now.
 
 ## Building
 
