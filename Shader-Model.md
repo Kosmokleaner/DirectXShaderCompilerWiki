@@ -12,5 +12,6 @@ Shader model versions gradually introduce new processing stages, relax constrain
 * [Shader Model 5.1](https://msdn.microsoft.com/en-us/library/windows/desktop/dn933277(v=vs.85).aspx). This is functionally very similar to Shader Model 5; the main change is more flexibility in resource selection by allowing indexing of arrays of descriptors from within a shader.
 * [[Shader Model 6.0]]. This is a superset of shader model 5.1 with some deprecated language elements and with the addition of wave intrinsics and 64-bit integers for arithmetic.
 * [[Shader Model 6.1]]. This is a superset of shader model 6.0 that adds support for SV_ViewID, barycentric semantics and the GetAttributeAtVertex intrinsic.
-* [[Shader Model 6.2]]. This is currently work-in-progress. This adds support for float16 (as opposed to minfloat16) and denorm mode selection.
+* [[Shader Model 6.2]]. Adds support for float16 (as opposed to minfloat16) and denorm mode selection.
+* [[Shader Model 6.3]]. Adds support for DirectX Raytracing (DXR), including libraries and linking.
 
