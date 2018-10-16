@@ -189,10 +189,7 @@ smallest index. The resulting value is thus uniform across the wave.
 
 #### `<type> WaveReadLaneAt( <type> expr, uint laneIndex)`
 
-Returns the value of expr for the given lane index within the current wave. The
-input lane index must be uniform across the wave. The resulting value is thus
-uniform across the wave. Effectively a broadcast of the value in the
-laneIndex’th lane.
+Returns the value of expr for the given lane index within the current wave.
 
 ### Wave Reduction Intrinsics
 
