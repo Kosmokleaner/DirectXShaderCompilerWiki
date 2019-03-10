@@ -14,4 +14,5 @@ Shader model versions gradually introduce new processing stages, relax constrain
 * [[Shader Model 6.1]]. This is a superset of shader model 6.0 that adds support for SV_ViewID, barycentric semantics and the GetAttributeAtVertex intrinsic.
 * [[Shader Model 6.2]]. Adds support for float16 (as opposed to minfloat16) and denorm mode selection.
 * [[Shader Model 6.3]]. Adds support for DirectX Raytracing (DXR), including libraries and linking.
+* [[Shader Model 6.4]]. Adds low-precision packed dot product intrinsics, and support for library sub-objects to simplify raytracing.
 
