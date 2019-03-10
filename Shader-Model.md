@@ -1,4 +1,4 @@
-Shader models are abstraction over the capabilities of hardware and drivers. They allow applications and games to target a well-known set of functionality for development, and allow hardware and driver developers to target that same description for support.
+The HLSL shader model is a versioning approach indicating which new features are added to the language. Each level allows an application or game to target a well-known set of functionality for development, and allows hardware and driver developers to target that same description for support.
 
 # Versions
 
