@@ -18,7 +18,7 @@ The new shader model adds the following 3 intrinsics to accelerate dot products 
 
 `float dot2add( half2 a, half2 b, float acc );`
 
- A 2-dimensional floating point dot product of half2 vectors with add. Multiplies the elements of the two half-precision float input vectors together and sums the results into the 32-bit float accumulator. These instructions operate within a single 32-bit wide SIMD lane. The inputs are 16-bit quantities packed into the same lane. This is not considered a ‘fused’ operation, and so need not emit INF due to fp16 overflow unless the [precise] flag is set.
+ A 2-dimensional floating point dot product of half2 vectors with add. Multiplies the elements of the two half-precision float input vectors together and sums the results into the 32-bit float accumulator. These instructions operate within a single 32-bit wide SIMD lane. The inputs are 16-bit quantities packed into the same lane. This is not considered a ‘fused’ operation, and so need not emit INF due to fp16 overflow unless the `precise` declaration is used.
 
 This covered under the low-precision feature bit (indicating native half and short support).
 
