@@ -17,7 +17,7 @@ The following language features could be added to the front-end with no impact o
 * References
 * Unions
 * Function Templates
-* Visbility: `public, private, protected, friend`
+* Visibility: `public, private, protected, friend`
 * Generic resource addressing
 
 ## Stretch language features
