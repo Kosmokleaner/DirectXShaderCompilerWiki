@@ -9,12 +9,12 @@ The following table provides important information about released versions of th
 
 All these releases have been via the Windows SDKs or PIX tools. PIX releases have a file version of the form 'dxcoob 0.2017.6.0' and the matching identifier would read '!llvm.ident:dxcoob 2017.06'
 
-The following releases are pairing compiler bits from GitHub with the OS-produced dxil.dll. The goal is to provide these milestones every month or two until the next major OS and associated SDK ships. Please see the [releases](https://github.com/microsoft/DirectXShaderCompiler/releases) tab.
+The following releases are pairing compiler bits from GitHub with the OS-produced dxil.dll. The goal is to provide these milestones every month or two until the next major OS and associated SDK ships. Please see the project [releases](https://github.com/microsoft/DirectXShaderCompiler/releases) tab.
 
 | Release | File | File version | Notes |
 |---------|------|--------------|-------|
 | Windows 10 19H1 Update SDK | dxil.dll | 10.0.18362.1| 19H1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019-07-15 Preview | dxc.exe, dxcompiler.dll | [1.4.0.2274](https://github.com/microsoft/DirectXShaderCompiler/releases/tag/v1.4.0.2274) | GitHub, Appveyor |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019-07-15 Preview | dxc.exe, dxcompiler.dll | 1.4.0.2275 | GitHub, Appveyor |
 <!--
 | Windows 10 20H1 Flight SDK | dxil.dll | 10.0.19xxx.1 | 20H1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019-09-12 Preview | dxc.exe, dxcompiler.dll | 1.4.0.2303 |  GitHub, Appveyor |
