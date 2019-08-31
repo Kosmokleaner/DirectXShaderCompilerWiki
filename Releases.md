@@ -14,7 +14,7 @@ The following releases are pairing compiler bits from GitHub with the OS-produce
 | Release | File | File version | Notes |
 |---------|------|--------------|-------|
 | Windows 10 19H1 Update SDK | dxil.dll | 10.0.18362.1| 19H1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019-07-15 Preview | dxc.exe, dxcompiler.dll | 1.4.0.2274 | GitHub, Appveyor |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019-07-15 Preview | dxc.exe, dxcompiler.dll | [1.4.0.2274](https://github.com/microsoft/DirectXShaderCompiler/releases/tag/v1.4.0.2274) | GitHub, Appveyor |
 <!--
 | Windows 10 20H1 Flight SDK | dxil.dll | 10.0.19xxx.1 | 20H1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019-09-12 Preview | dxc.exe, dxcompiler.dll | 1.4.0.2303 |  GitHub, Appveyor |
