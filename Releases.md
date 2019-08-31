@@ -9,7 +9,7 @@ The following table provides important information about released versions of th
 
 All these releases have been via the Windows SDKs or PIX tools. PIX releases have a file version of the form 'dxcoob 0.2017.6.0' and the matching identifier would read '!llvm.ident:dxcoob 2017.06'
 
-The following releases are pairing compiler bits from GitHub with the OS-produced dxil.dll. The goal is to provide these milestones every month or two until the next major OS and associated SDK ships.
+The following releases are pairing compiler bits from GitHub with the OS-produced dxil.dll. The goal is to provide these milestones every month or two until the next major OS and associated SDK ships. Please see the [releases](https://github.com/microsoft/DirectXShaderCompiler/releases) tab.
 
 | Release | File | File version | Notes |
 |---------|------|--------------|-------|
