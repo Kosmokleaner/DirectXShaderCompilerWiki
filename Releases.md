@@ -14,9 +14,9 @@ The following releases are pairing compiler bits from GitHub with the OS-produce
 | Release | File | File version | Notes |
 |---------|------|--------------|-------|
 | Windows 10 19H1 Update | dxil.dll | 10.0.18362.1 | validator v1.4 19H1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019-07-15 Preview | dxc.exe, dxcompiler.dll | 1.4.1907.0 | !llvm.ident:dxc 1.4 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019-07-15 Preview | dxc.exe, dxcompiler.dll | 1.4.1907.0 | !llvm.ident:dxc 1.4 |
 <!--
 | Windows 10 20H1 Flight SDK | dxil.dll | 10.0.18362.1 | 20H1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019-09-12 Preview | dxc.exe, dxcompiler.dll | 1.4.0.2303 |  !llvm.ident:dxc 1.5 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019-09-12 Preview | dxc.exe, dxcompiler.dll | 1.4.0.2303 |  !llvm.ident:dxc 1.5 |
 -->
 
