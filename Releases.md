@@ -4,7 +4,7 @@ The following table provides important information about released versions of th
 |---------|------|--------------|-------|
 | Windows 10 Creators Update     | dxil.dll | 10.0.15063.0 | no validator version |
 | Windows 10 Creators Update SDK | dxcompiler.dll | 10.0.15063.0 | !llvm.ident:dxc 1.0 |
-| Windows 10 Fall Creators Update     | dxil.dll | 10.0.16299.15 | validator version 1.1 |
+| Windows 10 Fall Creators Update     | dxil.dll | 10.0.16299.15 | validator v1.1 |
 | Windows 10 Fall Creators Update SDK | dxcompiler.dll | 10.0.16299.15 | !llvm.ident:dxc 1.1 |
 
 All these releases have been via the Windows SDKs or PIX tools. PIX releases have a file version of the form 'dxcoob 0.2017.6.0' and the matching identifier would read '!llvm.ident:dxcoob 2017.06'
