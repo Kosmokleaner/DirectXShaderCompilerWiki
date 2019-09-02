@@ -16,7 +16,7 @@ The following releases are pairing compiler bits from GitHub with the OS-produce
 | Windows 10 19H1 Update SDK | dxil.dll | 10.0.18362.1| 19H1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019-07-15 Preview | dxc.exe, dxcompiler.dll | 1.4.0.2275 | GitHub, Appveyor |
 <!--
-| Windows 10 20H1 Flight SDK | dxil.dll | 10.0.19xxx.1 | 20H1 |
+| Windows 10 20H1 Flight SDK | dxil.dll | 1.4.1907.0 | 20H1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019-09-12 Preview | dxc.exe, dxcompiler.dll | 1.4.0.2303 |  GitHub, Appveyor |
 -->
 
