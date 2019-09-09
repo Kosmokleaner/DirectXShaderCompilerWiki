@@ -1,3 +1,13 @@
+- **compiler_pass_tests**: It contains tests which test specific compiler passes. Tests are further organized under sub folders names after their passes' names.
+
+- **meta_tests**: This contains tests which validates our test utilities such as FileChecker implementation.
+
+- **scenario_based_tests**: This folder contains advance scenarios which aren't suitable to be covered as part of unit testing.
+
+- **shader_stage_tests**: It contains tests targeting specific features of a shader stage.
+
+- **unit_tests**: It contains unit level tests validating basic HLSL language functionality are working.
+
 ```
 test_root
 ├───compiler_pass_tests
