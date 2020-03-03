@@ -14,8 +14,7 @@ reductions, block transpose, bitonic sort or FFT, binning, stream
 de-duplication, etc.
 
 
-Most of these intrinsics may appear in both pixel shaders and compute shaders.
-Exceptions are indicated.
+All non-quad related Wave Intrinsics are available in all shader stages.   Quad wave intrinsics are available only in pixel shaders.
 
 These intrinsics operate as though the following statement was performed by
 default:
