@@ -17,7 +17,7 @@ This topic should be used as a reference point when porting your existing high-l
 2. Provide information about the old deprecated HLSL syntaxes that were supported on FXC but are no longer supported on DXC.
 
 ## Compiler .dll interface changes
-We recommend using the new `IDxcCompiler3::Compile` function for compiling DXC shaders.  For more information about helper routines that will make porting existing code to the new interface easier, along with sample code, see [Using DXC](dxc-usage.md).
+We recommend using the new `IDxcCompiler3::Compile` function for compiling DXC shaders.  For more information about helper routines that will make porting existing code to the new interface easier, along with sample code, see [Using DXC](Using-dxc.exe-and-dxcompiler.dll).
 
 ## Backward compatibility with FXC behaviors
 
