@@ -37,9 +37,11 @@ To specify build environment options, run the `utils\hct\hctstart.cmd` script pa
 Visual Studio 2017 and Visual Studio 2015 Update 3 both include the ability to install a supported Windows SDK.
 The [Windows 10 SDK](https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk) is needed to build tests that reference the D3D12 runtime. You may get this as part of installing/updating Visual Studio.
 
-You can install TAEF via the script at `utils\hct\hctgettaef.py` from your build environment. Alternatively, install the [Windows Driver Kit](https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit). No need to download and install tests. This is used to build and run tests.
+Install TAEF and some needed headers by installing the [Windows Driver Kit](https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit). No need to download and install tests. This is used to build and run tests. Do **not** select the WDK Visual Studio plugin or cmake will fail to find your compiler. 
 
 ## Using Visual Studio 2015
+
+To build from the command line follow the normal build steps, but pass `-vs2015` as a parameter to `hctbuild`.
 
 The supported version of Visual Studio 2015 is Update 3. In the install options, make sure the following options are checked:
 
@@ -63,6 +65,9 @@ You can then use the build directory in the `hctstart` script to test the build.
 
     hctstart C:\source\DirectXShaderCompiler %LOCALAPPDATA%\CMakeBuild\DirectXShaderCompiler\build\x64-Debug
 
+## Using Visual Studio 2019
+
+To build from the command line follow the normal build steps, but pass `-vs2019` as a parameter to `hctbuild`.
 
 ## Using Ninja
 
