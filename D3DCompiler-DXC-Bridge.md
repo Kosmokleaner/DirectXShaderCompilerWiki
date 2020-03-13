@@ -8,7 +8,7 @@ The use the library, copy d3dcompiler_dxc_bridge.dll next to the app you're inte
 
 d3dcompiler_47.dll is the most common DLL these days, but an app or game might be trying to use a prior version, such as d3dcompiler_43.dll. Make sure you rename to the name that the app is using. If necessary, you can have more than one copy of the file with different names.
 
-Some flags aren't implemented because they're not applicable or supported (D3DCOMPILE_ENABLE_BACKWARDS_COMPATIBILITY, D3DCOMPILE_ENABLE_STRICTNESS, D3DCOMPILE_PARTIAL_PRECISION). These are simply ignored in the bridge.
+Some flags aren't implemented because they're not applicable or supported (D3DCOMPILE_ENABLE_STRICTNESS, D3DCOMPILE_PARTIAL_PRECISION). These are simply ignored in the bridge.
 
 The include handler functionality in dxcompiler has a significantly different design and can't really be reimplemented. The dxcompiler version of the handler has no memory of the history of calls and will return file-not-found if a file isn't found with a specific name. The d3dcompiler version instead had to track open/close pairs and reimplement rules for local and system includes. Because of this limitation, there is no support for using a custom include handler (see [this thread](https://github.com/Microsoft/DirectXShaderCompiler/issues/161) for more information).
 
