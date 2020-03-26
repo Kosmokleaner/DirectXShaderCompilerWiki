@@ -1,17 +1,5 @@
-## What is Shader Model 6?
-Shader model v6 is the first version of HLSL to be implemented on the Clang/LLVM framework. To make it easy to integrate into existing projects, this new version is designed to be as close as possible to the previous version (v5.1). All existing shaders should just work, but you get the stability and robustness of a foundation containing 1000s of developer contribution hours. The output of shader model 6.0 is the LLVM-based DXIL, which replaces the older DXBC format.
-
 ## What is DXIL?
 DXIL (DirectX Intermediate Language) is a version of LLVM IR v3.7 with additions to support the key intrinsics and features of HLSL. The initial posting of this project uses DXIL version 0.7 (beta), but will shortly be updated to DXIL v1.0 for release.
-
-## What are the new features of this version (v6.0)?
-The primary goal of this first release is parity and consistency with existing shaders, however, some new features have been added:
-
-1. support for 64-bit integer data types (int64, uint64),
-2. the wave math intrinsics.
-
-## What are the Wave Math intrinsics?
-The wave math routines are a new set of intrinsics for use in HLSL that enable operations across lanes in the SIMD processor cores. These can help the performance of certain algorithms like culling and packing sparse data sets. The documentation is [here](https://github.com/Microsoft/DirectXShaderCompiler/wiki/Wave-Math-Intrinsics)
 
 ## What is Experimental mode, and how do I enable experimental features?
 Experimental mode is a new feature of Direct3D in Windows 10. It lets software developers collaborate with each other and with IHVs on prototyping of new features on GPU drivers. Here is how to access it:
@@ -28,9 +16,9 @@ Experimental mode is a new feature of Direct3D in Windows 10. It lets software d
 So the first version of the HLSL compiler was optimized for very short shaders. Now many codebases involve 1000s of shaders each with 1000s of lines of code. GPU programming is now much closer to CPU programming in terms of scale, so we decided to rebuild the compiler on a trusted/stable foundation with an excellent full-scale track record. When choosing a new basis for a strategic element like the GPU compiler, we recognized the industry cohesion around Clang and LLVM. By basing the new version on this foundation we enable GPU developers to benefit from, and build upon the large ecosystem of tools, utilities, documentation, core technologies, and expertise of the Clang/LLVM framework, including importers, exporters, translators, pretty printers (unparsers), code analysis, debugging, etc.
 
 ## What happens to the old compiler (fxc)?
-Fxc will continue to be supported (bug fixes, etc) so you can continue to use it.
+fxc is no longer under active development.  We are only fixing high priority bugs in fxc that we cannot offer a workaround for.  Also note that fxc only ships as a component of the Windows SDK and we are unable to ship a fix outside of the Windows SDK release process.  If you have a high priority fxc bug that you would like us to investigate, please mail askhlsl@microsoft.com.
 
-However, it will not support shader models beyond the current  v5.1, so new features will not be available via that path.
+fxc will not support shader models beyond the current v5.1, so new features will not be available via that path.
 
 Fxc will also continue to generate the original DXBC byte code, not the LLVM-derived DXIL.
 
