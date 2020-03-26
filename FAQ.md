@@ -22,6 +22,8 @@ fxc will not support shader models beyond the current v5.1, so new features will
 
 Fxc will also continue to generate the original DXBC byte code, not the LLVM-derived DXIL.
 
+Developers are strongly encouraged to port their shaders to DXC wherever possible: [[Porting-shaders-from-FXC-to-DXC]]
+
 ## How does the new compiler integrate into the Windows SDK?
 The version of this compiler that is available at that time will be included in each Windows SDK version release.
 
