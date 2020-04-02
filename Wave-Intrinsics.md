@@ -201,12 +201,6 @@ output is guaranteed uniform across the wave.
 Returns true if \<expr\> is the same for every active lane in the current wave
 (and thus uniform across it).
 
-#### `bool WaveActiveAllEqualBool( bool expr )`
-
-Returns true if \<expr\> is the same for every active lane in the current wave
-(and thus uniform across it). Input is a boolean. Performance is higher than the
-nonBool version WaveActiveAllEqual();
-
 #### `uint WaveActiveCountBits( bool bBit )`
 
 Counts the number of Boolean variables (bBit) which evaluate to true across all
