@@ -207,11 +207,14 @@ FUNC(TYPE)
 
 ## Unsupported FXC behaviors
 
-### Effect Framework
+### Effect framework
 Features related to the effects framework are no longer supported.
 
-### Uniform parameters on function entries
+### Uniform parameters on entry functions
 Uniform parameters on entry functions are no longer supported.
+
+### Interfaces
+Interfaces are no longer supported.
 
 ### Dimension-specific texture sample functions no longer supported
 Support for [tex1D](https://docs.microsoft.com/windows/desktop/direct3dhlsl/dx-graphics-hlsl-tex1d), [tex2D](https://docs.microsoft.com/windows/desktop/direct3dhlsl/dx-graphics-hlsl-tex2d), and similar functions for sampling are now deprecated. To learn how to port to supported sampling functions, see the following example.
