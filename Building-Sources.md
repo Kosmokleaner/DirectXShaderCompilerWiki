@@ -69,6 +69,8 @@ You can then use the build directory in the `hctstart` script to test the build.
 
 To build from the command line follow the normal build steps, but pass `-vs2019` as a parameter to `hctbuild`.
 
+Visual Studio 2019 may require a more recent version of cmake.
+
 ## Using Ninja
 
 To build with Ninja, please make sure that you have `ninja` and `cl` in your `%PATH%`.
