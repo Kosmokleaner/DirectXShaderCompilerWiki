@@ -314,33 +314,60 @@ where the number of elements written per lane is either 1 or 0.
 
 #### `<type> WavePrefixProduct( <type> value )`
 
-Returns the product of all of the <value>s in the active lanes in this wave
-with indices less than this lane.
+Returns the product of all of the <value>s in the active lanes in this wave with indices less than this lane.
+
+The order of operations on this routine cannot be guaranteed, so effectively the [precise] flag is ignored within it. A postfix product can be computed by multiplying the prefix product by the current lane’s value.
+
+Note that the active lane with the lowest index will always receive a 1 for it's prefix product.
 
 Example:
 
-    // compute offset into buffer for this lane’s writes
-    uint numWrites; // number of DWORDs to write to the output from this lane
-    uint offset = WavePrefixProduct( numWrites );
+    uint numToMultiply = 2;
+    uint prefixProduct = WavePrefixProduct( numToMultiply );
 
-The order of operations on this routine cannot be guaranteed, so effectively the
-[precise] flag is ignored within it. A postfix product can be computed by
-multiplying the prefix product by the current lane’s value.
+On a machine with a wave size of 8 and all lanes active except lanes 0 and 4 the following values would be returned from WavePrefixProduct.
+
+| lane index | status   | prefixProduct | 
+|------------|----------|---------------|
+| 0          | inactive | n/a           |
+| 1          | active   | = 1           |
+| 2          | active   | = 1\*2         |
+| 3          | active   | = 1\*2\*2       |
+| 4          | inactive | n/a           |
+| 5          | active   | = 1\*2\*2\*2     |
+| 6          | active   | = 1\*2\*2\*2\*2   |
+| 7          | active   | = 1\*2\*2\*2\*2\*2 |
+
+
 
 #### `<type> WavePrefixSum( <type> value )`
 
-Returns the sum of all of the \<value\>s in the active lanes of this wave having
-indices less than this one.
-
-Example:
-
-    // compute distinct offset into buffer for each lane
-    uint numWrites; // number of values to write to the output from this lane
-    uint offset = WavePrefixSum(numWrites); // offset for this lane
+Returns the sum of all of the \<value\>s in the active lanes of this wave having indices less than this one.
 
 The order of operations on this routine cannot be guaranteed, so effectively the
 [precise] flag is ignored within it. A postfix sum can be computed by adding the
 prefix sum to the current lane’s value.
+
+Note that the active lane with the lowest index will always receive a 0 for it's prefix sum.
+
+Example:
+
+    uint numToSum = 2;
+    uint prefixSum = WavePrefixSum( numToSum );
+
+On a machine with a wave size of 8 and all lanes active except lanes 0 and 4 the following values would be returned from WavePrefixSum.
+| lane index | status   | prefixProduct | 
+|------------|----------|---------------|
+| 0          | inactive | n/a           |
+| 1          | active   | = 0           |
+| 2          | active   | = 0+2         |
+| 3          | active   | = 0+2+2       |
+| 4          | inactive | n/a           |
+| 5          | active   | = 0+2+2+2     |
+| 6          | active   | = 0+2+2+2+2   |
+| 7          | active   | = 0+2+2+2+2+2 |
+
+
 
 ### Example: Ordered Append
 
