@@ -202,6 +202,10 @@ These two projects should be checked out under the `external/` directory.
 The three projects for testing, GoogleTest, Effcee, and RE2, should also be
 checked out under the `external/` directory.
 
+To add these dependencies as submodules, use the command: `git submodule add -f <url> <path>`.
+The `-f` flag is necessary because the submodupdes are located in the external directory,
+which is in the default .gitignore file, 
+
 ### Build system
 
 SPIR-V CodeGen functionality will structured as an optional feature in
