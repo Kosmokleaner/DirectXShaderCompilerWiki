@@ -96,3 +96,6 @@ As always, it is illegal to combine nointerpolation mode with centroid or sample
 
 ## Interactions with Clipping
 Per-vertex attributes are never clipped, and always passed along unmodified, so that the pixel shader gets access to their values as they are output by the last shader in the geometry pipeline (DS, VS or GS). This is also true for vertices which happen to be outside the frustum, or even behind the W=0 plane in clip-space, regardless of what kind of clipping situation occurs for the current primitive.
+
+## Wireframe mode
+When drawing primitives with wireframe rasterizer mode (i.e., D3D12_FILL_MODE_WIREFRAME), barycentric co-ordinates follow the same order as the input vertices. This means that although a barycentric co-ordinate in a wireframe tends to have a zero component and two non-zero ones, the 3rd component isn't necessary the zero.
