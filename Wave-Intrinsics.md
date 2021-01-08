@@ -13,8 +13,8 @@ Potential use cases include performance improvements to: stream compaction,
 reductions, block transpose, bitonic sort or FFT, binning, stream
 de-duplication, etc.
 
-
-All non-quad related Wave Intrinsics are available in all shader stages.   Quad wave intrinsics are available only in pixel and compute shaders.
+All non-quad related Wave Intrinsics are available in all shader stages.
+Quad wave intrinsics are available only in pixel and compute shaders.
 
 These intrinsics operate as though the following statement was performed by
 default:
@@ -38,19 +38,19 @@ concepts include “warp” and “wavefront”.
 Helper Lane: A lane which is executed solely for the purpose of gradients in
 pixel shader quads. The output of such a lane will be discarded, and so not
 rendered to the destination surface.
+UAV accesses and most wave intrinsics are disabled on helper lanes.
 
 Inactive Lane: a lane which is not being executed at this point in the code,
-e.g. due to flow control, or insufficient work to fill this lane in the wave, or
-because it is a helper lane.
+e.g. due to flow control, or insufficient work to fill this lane in the wave.
 
 Active Lane: A lane for which execution is currently being performed as
-determined by the specified flow control.
+determined by flow control and initial launch conditions.
 
 Quad: A set of 4 adjacent lanes corresponding to pixels arranged in a 2x2
 square. They are used to estimate gradients by differencing in either x or y. A
 wave may be comprised of multiple quads.
 
-All pixels in an active quad are potentially executed (may be active at some
+> All pixels in an active quad are potentially executed (may be active at some
 point). Those that do not produce visible results are termed helper lanes.
 
 **Caps Flags:**
@@ -97,11 +97,17 @@ The following new intrinsics are added to HLSL for use in shader model 6 and
 higher. The term “current wave” refers to the wave of lanes in which the program
 is executing.
 
+All wave operations with the exception of
+[Wave Query Intrinsics](wave-query-intrinsics) and
+[Quad-Wide Shuffle Operations](quad-wide-shuffle-operations) are disabled on helper lanes.
+They are treated as if flow control excludes these operations on helper lanes,
+therefore values read from or returned to helper lanes by these operations are undefined.
+
 ### Wave Query Intrinsics:
 
 #### `bool WaveIsFirstLane()`
 
-This result returns true only for the active lane in the current wave with the
+This result returns true only for the active, non-helper lane in the current wave with the
 smallest index. It can be used to identify operations that are to be executed
 only once per wave.
 
@@ -111,6 +117,8 @@ Example:
     {
         . . . // once per-wave code
     }
+
+> Caution must be used in the presence of helper lanes, since false will always be returned on helper lanes.
 
 #### `uint WaveGetLaneCount()`
 
@@ -136,22 +144,22 @@ current wave.
 
 #### `bool WaveActiveAnyTrue( bool expr )`
 
-Returns true if \<expr\> is true in any active lane in the current wave.
+Returns true if \<expr\> is true in any active non-helper lane in the current wave.
 
 #### `bool WaveActiveAllTrue( bool expr )`
 
-Returns true if \<expr\> is true in all active lanes in the current wave.
+Returns true if \<expr\> is true in all active non-helper lanes in the current wave.
 
 #### `uint4 WaveActiveBallot( bool expr )`
 
 Returns a uint4 containing a bitmask of the evaluation of the Boolean \<expr\> for all
-active lanes in the current wave. The least-significant bit corresponds to the
-lane with index zero. The bits corresponding to inactive lanes will be zero. The
+active non-helper lanes in the current wave. The least-significant bit corresponds to the
+lane with index zero. The bits corresponding to inactive or helper lanes will be zero. The
 bits that are greater than or equal to WaveGetLaneCount will be zero.
 
 Example:
 
-    // get a bitwise representation of the number of currently active lanes:
+    // get a bitwise representation of the number of currently active non-helper lanes:
     uint4 waveBits = WaveBallot( true ); // convert to bits
 
 *Note: the number of bits set in the result of this routine may vary
@@ -175,37 +183,45 @@ model for the program:
 
 Note: some operations (bitwise operators) only support the integer types.
 
-### Wave Broadcast Intrinsics
+### Wave Broadcast or Shuffle Intrinsics
 
-The following routines enable all active lanes in the current wave to receive
-the value from the specified lane, effectively broadcasting it. The return value
-from an invalid lane is undefined.
+The following routines enable all active non-helper lanes in the current wave to receive
+the value(s) from the specified lane(s). The return value
+from an inactive lane or helper lane is undefined.
 
 #### `<type> WaveReadLaneFirst( <type> expr )`
 
-Returns the value of expr for the active lane of the current wave with the
-smallest index. The resulting value is thus uniform across the wave.
+Returns the value of expr for the active non-helper lane of the current wave with the
+smallest index. The resulting value is thus uniform across the wave, making this effectively a broadcast operation.
+
+> Caution must be exercised in the presence of helper lanes,
+> since common patterns using this intrinsic
+> can produce unexpected results or undefined behavior.
 
 #### `<type> WaveReadLaneAt( <type> expr, uint laneIndex)`
 
 Returns the value of expr for the given lane index within the current wave.
 
+If laneIndex is uniform, this is effectively a broadcast operation, otherwise it is a shuffle operation.
+
+The result is undefined on a helper lane, or if the lane referred to by laneIndex is inactive or a helper lane.
+
 ### Wave Reduction Intrinsics
 
-These intrinsics compute the specified operation across all active lanes in the
-wave and broadcast the final result to all active lanes. Therefore, the final
-output is guaranteed uniform across the wave.
+These intrinsics compute the specified operation across all active non-helper lanes in the
+wave and broadcast the final result to all active non-helper lanes.
+Therefore, the final output is guaranteed uniform across the wave.
 
 #### `bool WaveActiveAllEqual(<type> expr )`
 
-Returns true if \<expr\> is the same for every active lane in the current wave
+Returns true if \<expr\> is the same for every active non-helper lane in the current wave
 (and thus uniform across it).
 
 #### `uint WaveActiveCountBits( bool bBit )`
 
 Counts the number of Boolean variables (bBit) which evaluate to true across all
-active lanes in the current wave, and replicates the result to all lanes in the
-wave. Providing an explicit `true` Boolean value returns the number of active lanes.
+active non-helper lanes in the current wave, and replicates the result to all lanes in the
+wave. Providing an explicit `true` Boolean value returns the number of active non-helper lanes.
 
 This can be implemented more efficiently than a full `WaveActiveSum()` via something
 like:
@@ -215,7 +231,7 @@ like:
 
 #### `<type> WaveActiveSum( <type> expr )`
 
-Sums up the value of \<expr\> across all active lanes in the current wave, and
+Sums up the value of \<expr\> across all active non-helper lanes in the current wave, and
 replicates it to all lanes in said wave. The order of operations is undefined.
 
 Example:
@@ -226,29 +242,29 @@ Example:
 
 #### `<type> WaveActiveProduct( <type> expr)`
 
-Multiplies the values of \<expr\> together across all active lanes in the
-current wave and replicates it back to all active lanes. The order of operations
+Multiplies the values of \<expr\> together across all active non-helper lanes in the
+current wave and replicates it back to all active non-helper lanes. The order of operations
 is undefined.
 
 #### `<int_type> WaveActiveBitAnd( <int_type> expr)`
 
-Returns the bitwise AND of all the values of \<expr\> across all active lanes in
-the current wave and replicates it back to all active lanes.
+Returns the bitwise AND of all the values of \<expr\> across all active non-helper lanes in
+the current wave and replicates it back to all active non-helper lanes.
 
 #### `<int_type> WaveActiveBitOr( <int_type> expr )`
 
-Returns the bitwise OR of all the values of \<expr\> across all active lanes in
-the current wave and replicates it back to all active lanes.
+Returns the bitwise OR of all the values of \<expr\> across all active non-helper lanes in
+the current wave and replicates it back to all active non-helper lanes.
 
 #### `<int_type> WaveActiveBitXor( <int_type> expr)`
 
-Returns the bitwise Exclusive OR of all the values of \<expr\> across all active
-lanes in the current wave and replicates it back to all active lanes.
+Returns the bitwise Exclusive OR of all the values of \<expr\> across all active non-helper
+lanes in the current wave and replicates it back to all active non-helper lanes.
 
 #### `<type> WaveActiveMin( <type> expr)`
 
-Computes minimum value of \<expr\> across all active lanes in the current wave
-and replicates it back to all active lanes. The order of operations is
+Computes minimum value of \<expr\> across all active non-helper lanes in the current wave
+and replicates it back to all active non-helper lanes. The order of operations is
 undefined.
 
 Example:
@@ -259,8 +275,8 @@ Example:
 
 #### `<type> WaveActiveMax( <type> expr);`
 
-Computes maximum value of \<expr\> across all active lanes in the current wave
-and replicates it back to all active lanes. The order of operations is
+Computes maximum value of \<expr\> across all active non-helper lanes in the current wave
+and replicates it back to all active non-helper lanes. The order of operations is
 undefined.
 
 Example:
@@ -280,8 +296,10 @@ the current lane’s value.
 #### `uint WavePrefixCountBits( Bool bBit )`
 
 Returns the sum of all the specified Boolean variables (bBit) set to true across
-all active lanes with indices smaller than this lane’s. A postfix version is
+all active non-helper lanes with indices smaller than this lane’s. A postfix version is
 implemented by adding the current lane’s bit value.
+
+> The active non-helper lane with the lowest index will always receive a 0.
 
 This can be implemented more efficiently than a full WavePrefixSum() via the
 following pseudo code:
@@ -314,18 +332,18 @@ where the number of elements written per lane is either 1 or 0.
 
 #### `<type> WavePrefixProduct( <type> value )`
 
-Returns the product of all of the <value>s in the active lanes in this wave with indices less than this lane.
+Returns the product of all of the <value>s in the active non-helper lanes in this wave with indices less than this lane.
 
 The order of operations on this routine cannot be guaranteed, so effectively the [precise] flag is ignored within it. A postfix product can be computed by multiplying the prefix product by the current lane’s value.
 
-Note that the active lane with the lowest index will always receive a 1 for it's prefix product.
+> The active non-helper lane with the lowest index will always receive a 1.
 
 Example:
 
     uint numToMultiply = 2;
     uint prefixProduct = WavePrefixProduct( numToMultiply );
 
-On a machine with a wave size of 8 and all lanes active except lanes 0 and 4 the following values would be returned from WavePrefixProduct.
+On a machine with a wave size of 8 and all lanes active and not helpers except lanes 0 and 4 the following values would be returned from WavePrefixProduct.
 
 | lane index | status   | prefixProduct | 
 |------------|----------|---------------|
@@ -342,20 +360,20 @@ On a machine with a wave size of 8 and all lanes active except lanes 0 and 4 the
 
 #### `<type> WavePrefixSum( <type> value )`
 
-Returns the sum of all of the \<value\>s in the active lanes of this wave having indices less than this one.
+Returns the sum of all of the \<value\>s in the active non-helper lanes of this wave having indices less than this one.
 
 The order of operations on this routine cannot be guaranteed, so effectively the
 [precise] flag is ignored within it. A postfix sum can be computed by adding the
 prefix sum to the current lane’s value.
 
-Note that the active lane with the lowest index will always receive a 0 for it's prefix sum.
+> The active non-helper lane with the lowest index will always receive a 0.
 
 Example:
 
     uint numToSum = 2;
     uint prefixSum = WavePrefixSum( numToSum );
 
-On a machine with a wave size of 8 and all lanes active except lanes 0 and 4 the following values would be returned from WavePrefixSum.
+On a machine with a wave size of 8 and all lanes active and not helpers except lanes 0 and 4 the following values would be returned from WavePrefixSum.
 | lane index | status   | prefixProduct | 
 |------------|----------|---------------|
 | 0          | inactive | n/a           |
@@ -371,7 +389,7 @@ On a machine with a wave size of 8 and all lanes active except lanes 0 and 4 the
 
 ### Example: Ordered Append
 
-This code demonstrates use of the above routines to implement a compacted write
+This code demonstrates use of the above intrinsics to implement a compacted write
 to an ordered stream where the number of elements written varies per lane.
 
     bool doesThisLaneHaveAnAppendItem = (NumberOfItemsToAppend) ? 1 : 0;
@@ -416,9 +434,13 @@ SIMD wave, for example *quadID = WaveGetLaneIndex() / 4; quadIndex =
 WaveGetLaneIndex() % 4*
 
 Since these routines rely on quad-level values, they assume that all lanes in
-the quad are made active, even helper lanes (those that are masked from final
+the quad are active, including helper lanes (those that are masked from final
 writes). This means they should be treated like the existing DDX and DDY
 intrinsics in that sense.
+
+Unlike for most other wave intrinsics, for these routines,
+reading from active helper lanes is well defined,
+and the return value is also well-defined on helper lanes.
 
 These routines assume that flow control execution is uniform at least across the
 quad.
@@ -443,3 +465,4 @@ lane in this quad.
 Returns the specified source value from the lane identified by quadLaneID within
 the current quad.
 
+`quadLaneID` is not required to be uniform, meaning this can be considered a broadcast if `quadLaneID` is uniform, or a shuffle if not.
