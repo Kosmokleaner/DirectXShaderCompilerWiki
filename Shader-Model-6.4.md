@@ -23,7 +23,7 @@ The new shader model adds the following 3 intrinsics to accelerate dot products 
 This covered under the low-precision feature bit (indicating native half and short support).
 
 ## Support for Variable Rate Shading
-Variable rate shading is supported as of this shader model. Only one token added to HLSL. It is supported only in Pixel Shaders.
+Variable rate shading is supported as of this shader model. Only one token was added to HLSL. 
 
 `SV_ShadingRate`
 
