@@ -213,6 +213,50 @@ Features related to the effects framework are no longer supported.
 ### Uniform parameters on entry functions
 Uniform parameters on entry functions are no longer supported.
 
+There is a rewriter utility that may help port shaders that use this feature to DXC.  The command line tool is called dxr.exe, and the API is in [dxctools.h](https://github.com/microsoft/DirectXShaderCompiler/blob/master/include/dxc/dxctools.h).
+
+The option to use is `-extract-entry-uniforms`, along with the entry name, and any other options necessary to parse the shader, such as `-I` include and `-D` define options.  See `dxr.exe -?` for a full option list.  For the API, use the IDxcRewriter2::RewriteWithOptions method.
+
+Rewritten HLSL will have the uniform resource and values extracted into the global scope for a single entry point.  Name collisions are possible if parameter names collide with global names.  It's meant to be used on one entry for one compilation, not on all entries in one file, otherwise name collisions will likely occur.  Additionally, resources will only be extracted if identified with the `uniform` keyword at this time.
+
+Uniform values extracted into global space will be placed in a constant buffer named `_Params`, since the equivalent in FXC would have been to put them in a constant buffer named `$Params`.
+
+Example:
+
+```C++
+float4 main(float4 color : INPUT,
+    uniform float scale,
+    uniform SamplerState sam,
+    uniform Texture2D<float2> tex,
+    uniform RWStructuredBuffer<float2> buf : register(u1)
+    ) : SV_TARGET
+{
+  buf[int(color.x)] = tex.SampleLevel(sam, color.xy * scale, 0).xy;
+  return color;
+}
+```
+
+Use the rewriter tool:
+
+```cmd
+dxr.exe example.hlsl -extract-entry-uniforms -E main -Fo output.hlsl
+```
+
+To produce something like this in `output.hlsl`:
+
+```C++
+uniform SamplerState sam;
+uniform Texture2D<float2> tex;
+uniform RWStructuredBuffer<float2> buf : register(u1);
+cbuffer _Params {
+uniform float scale;
+}
+float4 main(float4 color : INPUT) : SV_TARGET {
+  buf[int(color.x)] = tex.SampleLevel(sam, color.xy * scale, 0).xy;
+  return color;
+}
+```
+
 ### Interfaces
 Interfaces are no longer supported.
 
