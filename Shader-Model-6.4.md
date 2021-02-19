@@ -29,6 +29,8 @@ Variable rate shading is supported as of this shader model. Only one token was a
 
 Indicates the number of samples per pixel during operation of the current pixel shader thread.
 
+See the variable rate shading [spec](https://microsoft.github.io/DirectX-Specs/d3d/VariableRateShading.html) for more details.
+
 ## Library Sub-objects
 
 Check the developer documentation on DirectX raytracing [here](https://docs.microsoft.com/en-us/windows/desktop/direct3d12/direct3d-12-raytracing)
