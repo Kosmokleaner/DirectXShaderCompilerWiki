@@ -52,16 +52,25 @@ Example usage of __try/__except to catch unrecoverable errors.  Assume omitted c
 
   int main() {
     ...
+    //
+    // Compile it with specified arguments.
+    //
     CComPtr<IDxcResult> pResults;
     if (FAILED(Compile(pCompiler, &Source, pszArgs, _countof(pszArgs), pIncludeHandler, &pResults)))
+    {
+      wprintf(L"Compile Failed\n");
       return 1;
-    
-    // Recoverable error handling
+    }
+
+    //
+    // Print errors if present.
+    //
     CComPtr<IDxcBlobUtf8> pErrors = nullptr;
-    if (FAILED(pResults->GetOutput(DXC_OUT_ERRORS, IID_PPV_ARGS(&pErrors), nullptr)))
-      return 1;
-    if (pErrors != nullptr && pErrors->GetStringLength() != 0)
-      wprintf(L"Warnings and Errors:\n%S\n", pErrors->GetStringPointer());
+    // Note that d3dcompiler would return null if no errors or warnings are present.
+    // IDxcCompiler3::Compile will always return an error buffer, but its length will be zero if there are no warnings or errors.
+    if (SUCCEEDED(pResults->GetOutput(DXC_OUT_ERRORS, IID_PPV_ARGS(&pErrors), nullptr)) &&
+        pErrors != nullptr && pErrors->GetStringLength() != 0)
+        wprintf(L"Warnings and Errors:\n%S\n", pErrors->GetStringPointer());
 
     //
     // Quit if the compilation failed.
