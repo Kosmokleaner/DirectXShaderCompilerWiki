@@ -67,7 +67,8 @@ Example usage of __try/__except to catch unrecoverable errors.  Assume omitted c
     //
     CComPtr<IDxcBlobUtf8> pErrors = nullptr;
     // Note that d3dcompiler would return null if no errors or warnings are present.
-    // IDxcCompiler3::Compile will always return an error buffer, but its length will be zero if there are no warnings or errors.
+    // IDxcCompiler3::Compile will always return an error buffer,
+    // but its length will be zero if there are no warnings or errors.
     if (SUCCEEDED(pResults->GetOutput(DXC_OUT_ERRORS, IID_PPV_ARGS(&pErrors), nullptr)) &&
         pErrors != nullptr && pErrors->GetStringLength() != 0)
         wprintf(L"Warnings and Errors:\n%S\n", pErrors->GetStringPointer());
@@ -106,7 +107,8 @@ Example usage of __try/__except to catch unrecoverable errors.  Assume omitted c
     {
         FILE* fp = NULL;
 
-        // Note that if you don't specify -Fd, a pdb name will be automatically generated. Use this file name to save the pdb so that PIX can find it quickly.
+        // Note that if you don't specify -Fd, a pdb name will be automatically generated.
+        // Use this file name to save the pdb so that PIX can find it quickly.
         _wfopen_s(&fp, pPDBName->GetStringPointer(), L"wb");
         fwrite(pPDB->GetBufferPointer(), pPDB->GetBufferSize(), 1, fp);
         fclose(fp);
