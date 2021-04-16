@@ -46,7 +46,7 @@ Example usage of __try/__except to catch unrecoverable errors.  Assume omitted c
           );
       } __except(filter(GetExceptionCode(), GetExceptionInformation())) {
           // Report unrecoverable internal error
-          return 1;
+          return E_FAIL;
       }
   }
 
