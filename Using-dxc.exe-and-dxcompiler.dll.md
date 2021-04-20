@@ -65,16 +65,16 @@ The flag `-Fre` can now be used to save your reflection data out to a separate f
 When your shader is compiled, the .pdb filename (supplied with the `-Fd` option) and a hash of the shader is stored in the shader. PIX uses this information to find the shader .pdb.  
 
 ### Slim PDBs
-A new compilation flag, “-Zs” creates a new type of .pdb that is far smaller than traditional .pdbs and decreases compilation time when .pdbs are generated.  These “slim” .pdbs contain
+A new compilation flag, `-Zs` creates a new type of .pdb that is far smaller than traditional .pdbs and decreases compilation time when .pdbs are generated.  These “slim” .pdbs contain
 only the source code and compilation arguments used to generate the shader.  PIX will generate the additional debug information required “on demand” when the shader is debugged.
  
-Note that full .pdbs (which contain everything a slim .pdb does plus the full debug information used by the debugger) are still supported with the “-Zi” flag.
+Note that full .pdbs (which contain everything a slim .pdb does plus the full debug information used by the debugger) are still supported with the `-Zi` flag.
  
 ### A note on compiler versioning.
 When a .pdb is generated, the version of the compiler is stored in the .pdb so that PIX can know which compiler was use to originally compiler the shader.  PIX will report if the current compiler associated with PIX does not match the one used to generate the shader and the matching compiler can be supplied if desired.
  
 ### New pdb interface.
-A new interface call IDxcPdbUtils was introduced in dxcapi.h.  This interface allows you to inspect the source, compilation arguments, compiler version, and hash as well as allows you to recompile the shader from the pdb if desired.
+A new interface call IDxcPdbUtils has been introduced in dxcapi.h.  This interface allows you to inspect the source, compilation arguments, compiler version, and hash as well as allows you to recompile the shader from the pdb if desired.
 
 ## DXCompiler DLL interface
 
