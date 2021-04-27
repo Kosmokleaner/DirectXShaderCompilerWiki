@@ -1,6 +1,22 @@
+The results of `IDxcCompiler::Compile` can take a few different forms based on the `HRESULT` returned, the status of the `IDxcResult` or, in extreme cases, a thrown structured exception.
+
+## Successful HRESULT
+
+If the `HRESULT` is `S_OK`, the compiler object and allocator are in a good state and can be reused. It's still possible that the compilation failed. To determine if the compilation failed, check the status of the `IDxcResult` and the additional information in the error buffer.
+
+## Failure HRESULT
+
+There are a few ways that `Compile()` might return a failure code. In any of these cases, the process should be terminated as the compiler and allocator cannot be relied on.
+
+* `E_INVALIDARG` - One or more of the parameters to Compile() are incorrect
+* `E_OUTOFMEMORY` - An internal system memory allocation failed
+* `E_FAIL` - Unexpected c++ exception caught. Indicates an internal compiler error
+
+## Internal Compiler Errors
 Occasionally, a shader compilation may encounter bugs in the compiler and produce an internal error. When such errors are encountered, compilation must fail. How this error is reported depends on the severity of the error and how the compiler is being invoked.
 
-Most fatal internal errors are recoverable. In this case the compiler can retrieve details about the error and return the information in the error log and return an error code. This is true whether the compiler is invoked from the API or from the command line.
+### Recoverable
+Most fatal internal errors are recoverable. In this case Compile will return `S_OK` and the error log will contain messages prefixed with "Internal Error". If invoked from the command line, these errors will be printed to the output stream.
 
 Examples of recoverable errors:
 
@@ -9,7 +25,7 @@ Examples of recoverable errors:
 * assert failure (debug built compilers only)
 * explicitly raised fatal errors
 
-
+### Non-recoverable
 Unrecoverable internal errors involve state that cannot reliably write to the error log. In such cases, the compiler will raise a structured exception that can be caught using __try and __except statements around the API call. https://docs.microsoft.com/en-us/cpp/cpp/try-except-statement. This may require moving these calls into an individual dedicated function. The dxc command line executable catches these exceptions by declaring an unhandled exception handler and printing as much information about the failure as possible.
 
 
@@ -18,6 +34,8 @@ Examples of unrecoverable errors:
 * Memory access violation
 * Stack overflow
 
+
+## Example code
 Example usage of __try/__except to catch unrecoverable errors.  Assume omitted code as described in [Using dxc.exe and dxcompiler.dll](Using-dxc.exe-and-dxcompiler.dll)
 
 ```c++
@@ -45,7 +63,8 @@ Example usage of __try/__except to catch unrecoverable errors.  Assume omitted c
                    IID_PPV_ARGS(pResults) // Compiler output status, buffer, and errors.
           );
       } __except(filter(GetExceptionCode(), GetExceptionInformation())) {
-          // Report unrecoverable internal error
+          // UNRECOVERABLE ERROR!
+          // At this point, state could be extremely corrupt. Terminate the process
           return E_FAIL;
       }
   }
@@ -58,7 +77,10 @@ Example usage of __try/__except to catch unrecoverable errors.  Assume omitted c
     CComPtr<IDxcResult> pResults;
     if (FAILED(Compile(pCompiler, &Source, pszArgs, _countof(pszArgs), pIncludeHandler, &pResults)))
     {
-      wprintf(L"Compile Failed\n");
+      // Either an unrecoverable error exception was caught or a failing HRESULT was returned
+      // Use fputs to prevent any chance of new allocations
+      // Terminate the process
+      puts("Internal error or API misuse! Compile Failed\n");
       return 1;
     }
 
@@ -79,6 +101,8 @@ Example usage of __try/__except to catch unrecoverable errors.  Assume omitted c
     HRESULT hrStatus;
     if (FAILED(pResults->GetStatus(&hrStatus)) || FAILED(hrStatus))
     {
+        // Compilation failed, but successful HRESULT was returned.
+        // Could reuse the compiler and allocator objects. For simplicity, exit here anyway
         wprintf(L"Compilation Failed\n");
         return 1;
     }
