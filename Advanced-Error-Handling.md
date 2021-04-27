@@ -39,15 +39,29 @@ Examples of unrecoverable errors:
 Example usage of __try/__except to catch unrecoverable errors.  Assume omitted code as described in [Using dxc.exe and dxcompiler.dll](Using-dxc.exe-and-dxcompiler.dll)
 
 ```c++
-  int filter(unsigned int code, struct PEXCEPTION_POINTERS pExceptionInfo) {
+  int filter(unsigned int code, struct _EXCEPTION_POINTERS *pExceptionInfo) {
+    static char scratch[32];
+    // report all errors with fputs to prevent any allocation
     if (code == EXCEPTION_ACCESS_VIOLATION) {
       // use pExceptionInfo to document and report error
+      fputs("access violation. Attempted to ", stderr);
+      if (pExceptionInfo->ExceptionRecord->ExceptionInformation[0])
+        fputs("write", stderr);
+      else
+        fputs("read", stderr);
+      fputs(" from address ", stderr);
+      sprintf_s(scratch, _countof(scratch), "0x%p\n", (void*)pExceptionInfo->ExceptionRecord->ExceptionInformation[1]);
+      fputs(scratch, stderr);
       return EXCEPTION_EXECUTE_HANDLER;
     }
     if (code == EXCEPTION_STACK_OVERFLOW) {
       // use pExceptionInfo to document and report error
+      fputs("stack overflow\n", stderr);
       return EXCEPTION_EXECUTE_HANDLER;
     }
+    fputs("Unrecoverable Error ", stderr);
+    sprintf_s(scratch, _countof(scratch), "0x%08x\n", code);
+    fputs(scratch, stderr);
     return EXCEPTION_CONTINUE_SEARCH;
   }
 
