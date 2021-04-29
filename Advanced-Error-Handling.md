@@ -50,7 +50,8 @@ Example usage of __try/__except to catch unrecoverable errors.  Assume omitted c
       else
         fputs("read", stderr);
       fputs(" from address ", stderr);
-      sprintf_s(scratch, _countof(scratch), "0x%p\n", (void*)pExceptionInfo->ExceptionRecord->ExceptionInformation[1]);
+      sprintf_s(scratch, _countof(scratch), "0x%p\n", 
+                (void*)pExceptionInfo->ExceptionRecord->ExceptionInformation[1]);
       fputs(scratch, stderr);
       return EXCEPTION_EXECUTE_HANDLER;
     }
