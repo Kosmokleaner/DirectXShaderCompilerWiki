@@ -1,4 +1,4 @@
-DirectXShaderCompiler has added new versions of `Load` and `Store` methods to the existing `ByteAddressBuffer` and `RWByteAddressBuffer` objects.  The new methods are templated to allow types other than uint, such as aggregate types to be used directly.
+DirectXShaderCompiler has added new versions of `Load` and `Store` methods to the existing `ByteAddressBuffer` and `RWByteAddressBuffer` objects.  The new methods are templated to allow types other than uint, such as aggregate types, to be used directly.
 
 The layout of the type mapped into the buffer matches the layout used for `StructuredBuffer`.  The byteOffset should be aligned by size of the largest component that the type contains.
 
