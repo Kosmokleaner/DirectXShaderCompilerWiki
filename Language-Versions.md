@@ -1,4 +1,4 @@
-Just like DirectX Shader Compiler supports multiple [[Shader Models]] that evolve over time to reflect hardware capabilities, so does it support multiple language versions. Language versions are typically named after the year of their release, and will occasionally be required to address features of specific shader models (for example, new primitive data types).
+Just like DirectX Shader Compiler supports multiple [[Shader Model]] that evolve over time to reflect hardware capabilities, so does it support multiple language versions. Language versions are typically named after the year of their release, and will occasionally be required to address features of specific shader models (for example, new primitive data types).
 
 Additions of new intrinsics are typically considered shader model revisions, unless they also affect the type system.
 
@@ -8,7 +8,7 @@ This is the version of the HLSL language supported by fxc. It is only partially 
 
 ## HLSL 2016
 
-This is the first version of the HLSL language that the DirectX Shader Compiler can compile to DXIL. It adds support for int64_t and uint64_t and their vector and matrix forms. It also removes some features from HLSL 2015, see [[Breaking Changes from FXC]].
+This is the first version of the HLSL language that the DirectX Shader Compiler can compile to DXIL. It adds support for int64_t and uint64_t and their vector and matrix forms. It also removes some features from HLSL 2015, see [[Porting shaders from FXC to DXC]].
 
 ## HLSL 2017
 
