@@ -68,7 +68,8 @@ As reported by `dxc -?` or `dxc --version` (where available). A release compiler
 This can be useful to work around bugs in a given version:
 
 ```hlsl
-#if __DXC_VERSION_MAJOR == 1 && __DXC_VERSION_MINOR <= 6 && __DXC_VERSION_RELEASE <= 2106 && __DXC_VERSION_RELEASE > 0
+#if __DXC_VERSION_MAJOR == 1 && (__DXC_VERSION_MINOR < 6 || \
+                                 (__DXC_VERSION_MINOR == 6 && __DXC_VERSION_RELEASE <= 2106 && __DXC_VERSION_RELEASE > 0))
   return WARBug12345(Outputs);
 #else
   return Outputs;
