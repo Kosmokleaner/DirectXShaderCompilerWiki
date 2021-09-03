@@ -43,8 +43,8 @@ You can find documentation for this project in the docs/ directory. These contai
  this file contains a user guide for dxc.exe
 
 Additional documentation is available on the Wiki:
-
-* Extra programs, available only via the GitHub project: [[an interactive editor|dndxc]], [[assembler tool|dxa]], [[optimizer tool|dxopt]], [[validator tool|dxv]], and [[d3dcompiler bridge DLL|d3dcompiler-dxc-bridge]].
+* [[Shader Model]] and [[Language|Language Versions]] version information
+* More information on [[Porting shaders from FXC to DXC]] or try the [[D3DCompiler DXC Bridge]].
 * [[Releases]].
 
 ## Code of Conduct
