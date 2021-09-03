@@ -1,5 +1,7 @@
 The HLSL shader model is a versioning approach indicating which new features are added to the language. Each level allows an application or game to target a well-known set of functionality for development, and allows hardware and driver developers to target that same description for support.
 
+The currently targetted shader model can be accessed from within the shader code using the [[Predefined Version Macros]] `__SHADER_TARGET_MAJOR` and `__SHADER_TARGET_MINOR`.
+
 # Versions
 
 Shader model versions gradually introduce new processing stages, relax constraints and introduce a superset of capabilities.
