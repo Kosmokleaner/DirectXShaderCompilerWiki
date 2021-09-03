@@ -18,6 +18,5 @@ Information on the latest Windows SDK release:
 | Windows 10, version 21H1  | dxil.dll | 10.0.19041.685 | validator v1.5 |
 | Windows 10, version 21H1 SDK  | dxcompiler.dll | 10.0.19041.685 | !llvm.ident:dxc 1.5 |
 
-All these releases have been via the Windows SDKs or PIX tools. PIX releases have a file version of the form 'dxcoob 0.2017.6.0' and the matching identifier would read '!llvm.ident:dxcoob 2017.06'
 
 The compiler version can be accessed from shader code using the [[Predefined Version Macros]] `__DXC_VERSION_MAJOR`, `__DXC_VERSION_MINOR`, `__DXC_VERSION_RELEASE`, `__DXC_VERSION_COMMITS` representing the 4-part version string produced by `dxc -?` or `dxc --version`
