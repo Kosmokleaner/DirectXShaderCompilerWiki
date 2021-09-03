@@ -2,6 +2,8 @@ Just like DirectX Shader Compiler supports multiple [[Shader Model]] that evolve
 
 Additions of new intrinsics are typically considered shader model revisions, unless they also affect the type system.
 
+The currently enabled language version can be accessed from within the shader code using the [[Predefined Version Macro|Predefined Version Macros]] `__HLSL_VERSION`.
+
 ## HLSL 2015
 
 This is the version of the HLSL language supported by fxc. It is only partially supported by the DirectX Shader Compiler, mostly with the goal of enabling basic tooling scenarios that require an abstract syntax tree.
