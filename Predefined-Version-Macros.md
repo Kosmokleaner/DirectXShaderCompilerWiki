@@ -65,11 +65,12 @@ Predefined integers representing the four components of the version information 
 
 As reported by `dxc -?` or `dxc --version` (where available). A release compiler has a form similar to: "1.6.2106.0" is major version of 1, minor of 6, release 2106, and the commits number is 0. Builds from the main branch outside a release will be of the form "1.6.0.2955" where the final number represents the number of commits with a release number of 0. If the shader is to be compiled with non-release compilers, this will have to be accounted for.
 
-This can be useful to work around bugs in a given version:
+This can be useful to work around bugs in a given version. For example, to work around a bug present in 1.6.2106 and earlier releases:
 
 ```hlsl
 #if __DXC_VERSION_MAJOR == 1 && (__DXC_VERSION_MINOR < 6 || \
-                                 (__DXC_VERSION_MINOR == 6 && __DXC_VERSION_RELEASE <= 2106 && __DXC_VERSION_RELEASE > 0))
+                                 (__DXC_VERSION_MINOR == 6 && __DXC_VERSION_RELEASE <= 2106 \
+                                                                 && __DXC_VERSION_RELEASE > 0))
   return WARBug12345(Outputs);
 #else
   return Outputs;
