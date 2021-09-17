@@ -106,3 +106,8 @@ We can use `textureArray` and `samplerArray` in following ways:
   * The generated SPIR-V will load the combined image sampler, extract the image from the combined image sampler using [OpImage](https://www.khronos.org/registry/SPIR-V/specs/unified1/SPIRV.html#OpImage) and combine it with other samplers using [OpSampledImage](https://www.khronos.org/registry/SPIR-V/specs/unified1/SPIRV.html#OpSampledImage) to use [image instructions](https://www.khronos.org/registry/SPIR-V/specs/unified1/SPIRV.html#_a_id_image_a_image_instructions).
 
 Note that we cannot use `samplerArray` with textures other than `textureArray` because there is no SPIR-V instruction to extract the sampler from a combined image sampler.
+
+Another example is [here](https://github.com/jaebaek/Vulkan/blob/vk_combined_image_sampler/data/shaders/hlsl/deferredshadows/deferred.frag). It is a fragment shader for [SaschaWillems's deferredshadows Vulkan example](https://github.com/jaebaek/Vulkan/tree/vk_combined_image_sampler/examples/deferredshadows). You can
+1. clone [this branch](https://github.com/jaebaek/Vulkan/tree/vk_combined_image_sampler)
+2. [build](https://github.com/jaebaek/Vulkan/blob/vk_combined_image_sampler/BUILD.md#-linux) it
+3. test the deferredshadows example with `--shaders hlsl` option that enables the HLSL fragment shader.
