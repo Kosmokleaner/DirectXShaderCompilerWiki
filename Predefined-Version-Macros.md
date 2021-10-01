@@ -50,8 +50,9 @@ Note that these reflect the shader model specified at compile time and not the m
 The `__HLSL_VERSION` macro contains an integer representing the HLSL language version specified by the `-HV <version>` flag or the default the compiler uses. Current options are:
 
 * 2016 - compatibility version useful for compatibility with FXC
+* 2017 - Added enums to the language
 * 2018 - Current default version
-* 2021 - incomplete, unreleased version as yet unavailable in main branch
+* 2021 - Latest version with C++ style features that can be enabled, but is not yet the default
 
 # Compiler Release Version Defines
 
