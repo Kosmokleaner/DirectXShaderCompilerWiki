@@ -29,6 +29,8 @@ This version adds support for various C++ style features:
 * C++ style function overloading
 * Logical operation short-circuiting for scalars
 
+For more detail see [[HLSL 2021]]
+
 ## Additional Changes
 
 Some features have been added that aren't exactly considered language changes or tied to an HLSL version, and also not tied to a specific shader model.  One such feature is [[ByteAddressBuffer Load Store Additions]].
