@@ -12,11 +12,9 @@ Here is a summary of the key points:
 
 ## Backlog of candidate language features
 The following language features could be added to the front-end with no impact on core functionality, drivers, or hardware:
-* Bit-fields
 * Language Standard Annotations
 * References
 * Unions
-* Function Templates
 * Visibility: `public, private, protected, friend`
 * Generic resource addressing
 
@@ -42,8 +40,6 @@ There are currently no plans to implement these features in the language.
 ## Candidate hardware features
 These are examples of changes to the language that require to changes in the hardware, and so will require updates to the underlying implementation.
 * Blender intrinsics
-* More atomic operations
-* More wave-level operations
 * Programmable blending (aka RT Read)
 * Input of arbitrary structures
 * More control over IEEE behavior
