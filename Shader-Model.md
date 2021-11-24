@@ -18,4 +18,4 @@ Shader model versions gradually introduce new processing stages, relax constrain
 * [[Shader Model 6.3]]. Adds support for DirectX Raytracing (DXR), including libraries and linking.
 * [[Shader Model 6.4]]. Adds Variable Rate Shading, low-precision packed dot product intrinsics, and support for library sub-objects to simplify raytracing.
 * [[Shader Model 6.5]]. Adds support for DXR 1.1, Sampler Feedback, Mesh and Amplification shaders, and additional Wave Intrinsics.
-
+* [[Shader Model 6.6]]. Adds support for new atomic operations (inc. 64-bit), dynamic resources, IsHelperLane(), derivatives in compute, mesh, and amplification shaders, pack/unpack, WaveSize, and Raytracing Payload Access Qualifiers.
