@@ -10,6 +10,8 @@ For a better design of this new DXC/SPIR-V feature, we keep the following things
 ### Definition of Texture and SamplerState with `[[vk::combinedImageSampler]]`
 You have to define a Texture (e.g., `Texture2D`, `Texture1DArray`, `TextureCube`) and `SamplerState` with the same descriptor set and binding numbers to use the combined image sampler (or sampled image) type.
 
+The command line option `-fvk-t-shift` can be used to apply shifts to combined texture and sampler resource bindings. When `[[vk::combinedImageSampler]]` is applied to a resource, the `-fvk-t-shift` value will be used to shift its bindings and any `-fvk-s-shift` value will be ignored.
+
 See the following examples. Note that the following shader examples will work fine for both Vulkan and DirectX.
 ```
 // Create a combined image/sampler at binding=2
