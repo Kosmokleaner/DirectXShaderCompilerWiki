@@ -19,11 +19,11 @@ We designed the HLSL version of GL_EXT_spirv_intrinsics to allow developers to e
   - Return type: void
   - uint _execution_mode_ must be a constant expression.
   - Extra parameters must be constant expressions. Some [execution modes](https://www.khronos.org/registry/SPIR-V/specs/unified1/SPIRV.html#_execution_mode) e.g., `Invocations`, `LocalSize`, .. have extra parameters. Since extra parameters of `OpExecutionMode` are literals, DXC will emit these extra parameters as literals as well.
-- [[vk::ext_extension(string _extension_name_)]]
+- `[[vk::ext_extension(string _extension_name_)]]`
   - An attribute to specify `OpExtension` instruction.
   - It can be an attribute of `vk::ext_execution_mode(...)`, `vk::ext_execution_mode_id(...)`, a function declared with `vk::ext_instruction(...)`, or a function declared with `[[vk::ext_type_def(...)]]`. We can use multiple `[[vk::ext_extension(string extension_name)]]` for a single function.
   - string _extension_name_ must be a constant string.
-- [[vk::ext_capability(uint _capability_)]]
+- `[[vk::ext_capability(uint _capability_)]]`
   - An attribute to specify `OpCapability` instruction.
   - It can be an attribute of `vk::ext_execution_mode(...)`, `vk::ext_execution_mode_id(...)`, a function declared with `vk::ext_instruction(...)`, or a function declared with `[[vk::ext_type_def(...)]]`. We can use multiple `[[vk::ext_extension(string extension_name)]]` for a single function.
   - uint _capability_ must be a constant expression.
@@ -49,18 +49,18 @@ OpExecutionMode %main StencilRefReplacingEXT
   - Return type: void
   - uint _execution_mode_ must be a constant expression.
   - Extra parameters must be constant expressions. Some [execution modes](https://www.khronos.org/registry/SPIR-V/specs/unified1/SPIRV.html#_execution_mode) e.g., `LocalSizeId` have extra id parameters. Since they must be result ids of instructions, DXC will generate `OpConstantXXX` instructions for them.
-- [[vk::ext_instruction(uint _opcode_, string _extended_instruction_set_)]]
-return_type mock_function(parameters, …, [[vk::ext_reference]] parameter, … , [[vk::ext_literal]] parameter …);
-  - [[vk::ext_instruction(uint opcode, string extended_instruction_set)]]
+- `[[vk::ext_instruction(uint _opcode_, string _extended_instruction_set_)]]
+return_type mock_function(parameters, …, [[vk::ext_reference]] parameter, … , [[vk::ext_literal]] parameter …);`
+  - `[[vk::ext_instruction(uint opcode, string extended_instruction_set)]]`
     - An attribute to specify that the function declaration with this attribute will be used as a SPIR-V instruction.
     - To specify extensions and/or capabilities needed by the SPIR-V instruction, we have to use `vk::ext_extension(string)` and `vk::ext_capability(uint)` attributes.
     - uint _opcode_ must be a constant expression.
     - string _extended_instruction_set_  is optional and it must be a constant string.
-  - [[vk::ext_reference]]
+  - `[[vk::ext_reference]]`
     - If a parameter has a `[[vk::ext_reference]]` attribute, we use the pointer as the operand of SPIR-V instruction instead of loading it and using the value as the operand.
-  - [[vk::ext_literal]]
+  - `[[vk::ext_literal]]`
     - If a parameter has an attribute `[[vk::ext_literal]]`, we use it in a literal form as the operand of SPIR-V instruction instead of a result id of a SPIR-V instruction.
-  - Parameter without [[vk::ext_reference]] and [[vk::ext_literal]] attributes
+  - Parameter without `[[vk::ext_reference]]` and `[[vk::ext_literal]]` attributes
     - If it is a variable, we load it using OpLoad and use the loaded value as the operand of the SPIR-V instruction.
     - If it is a constant, we create OpConstant and use it as the operand.
     - If it is a SPIR-V result id whose type is `vk::ext_result_id<T>` (we will explain `vk::ext_result_id<T>` below), we use the SPIR-V result id as the operand.
@@ -71,7 +71,7 @@ return_type mock_function(parameters, …, [[vk::ext_reference]] parameter, … 
     - If the mock_function is used to initialize a variable with `vk::ext_result_id<T>` type, we do not generate an `OpStore`, but set the variable with `vk::ext_result_id<T>` type as the result id of the SPIR-V instruction. In addition, the result type of the SPIR-V instruction will be **T** that is the template argument of vk::ext_result_id<**T**>.
       - It is particularly useful when we want to use a result id of the SPIR-V instruction for the operand of another SPIR-V instruction declared by a mock function with `[[vk::ext_instruction(...)]]` attribute.
 - vk::ext_result_id<**T**>
-  - A type that can be used only for the result or a parameter of a function with [[vk::ext_instruction(uint opcode, string extended_instruction_set)]] attribute
+  - A type that can be used only for the result or a parameter of a function with `[[vk::ext_instruction(uint opcode, string extended_instruction_set)]]` attribute
   - A variable defined with vk::ext_result_id<**T**> type does not have a physical storage. It becomes the result id of the SPIR-V instruction whose result type is **T**.
 
 Example:
@@ -134,17 +134,17 @@ float2 foo = FMin3AMD(x, y, z);
                OpStore %foo %29
 ```
 
-- [[vk::ext_type_def(uint _unique_type_id_, uint opcode)]]
-void createTypeXYZ(parameters, …, [[vk::ext_reference]] parameter, … , [[vk::ext_literal]] parameter …);
-  - [[vk::ext_type_def(uint unique_type_id, uint opcode)]] is an attribute similar to [[vk::ext_instruction(...)]], but it specifies that a function declaration will be used to define a type with opcode.
-  - The function declared with [[vk::ext_type_def(..)]] must have a void return type.
-  - After declaring the function with [[vk::ext_type_def(..)]], we have to call the declared function e.g., void createTypeXYZ(..) with proper arguments to actually define the type.
+- `[[vk::ext_type_def(uint _unique_type_id_, uint opcode)]]
+void createTypeXYZ(parameters, …, [[vk::ext_reference]] parameter, … , [[vk::ext_literal]] parameter …);`
+  - `[[vk::ext_type_def(uint unique_type_id, uint opcode)]]` is an attribute similar to `[[vk::ext_instruction(...)]]`, but it specifies that a function declaration will be used to define a type with opcode.
+  - The function declared with `[[vk::ext_type_def(..)]]` must have a void return type.
+  - After declaring the function with `[[vk::ext_type_def(..)]]`, we have to call the declared function e.g., void createTypeXYZ(..) with proper arguments to actually define the type.
   - uint _unique_type_id_ can be any constant unsigned integer number, but it must be a unique identifier for the defined type. It will be used by vk::ext_type<uint unique_type_id> (see below).
   - uint opcode must be the opcode of the type instruction.
   - Parameters for the declared function are extra operands to define the type.
 - vk::ext_type<uint _unique_type_id_>
-  - A special type that specifies the type created by a function declared with [[vk::ext_type_def(..)]].
-  - uint _unique_type_id_ must be the same as the one of [[vk::ext_type_def(uint unique_type_id, uint opcode)]].
+  - A special type that specifies the type created by a function declared with `[[vk::ext_type_def(..)]]`.
+  - uint _unique_type_id_ must be the same as the one of `[[vk::ext_type_def(uint unique_type_id, uint opcode)]]`.
 
 Example:
 ```
@@ -219,7 +219,7 @@ OpExtension "SPV_KHR_ray_query"
 OpRayQueryTerminateKHR %rq
 ```
 
-- [[vk::ext_storage_class(uint storage_class)]] type
+- `[[vk::ext_storage_class(uint storage_class)]]` type
   - An attribute that must be added to a type to specify the storage class.
 
 Example:
@@ -231,15 +231,15 @@ Example:
 %foo = OpVariable %_ptr_CrossWorkgroup_int CrossWorkgroup
 ```
 
-- [[vk::ext_decorate(decoration, … int / float / bool literal)]]
+- `[[vk::ext_decorate(decoration, … int / float / bool literal)]]`
   - An attribute for a decoration of a variable. It takes the first integer parameter as its `Decoration` operand, and further parameters as `Extra Operands`. If it is used for a member of a struct/class type, OpMemberDecorate will be generated to decorate the member. Otherwise, OpDecorate will be generated to decorate the variable.
-- [[vk::ext_decorate_id(decoration, … constant expression)]]
-  - Similar to [[vk::ext_decorate(decoration, … int / float / bool literal)]] but it generates OpDecorateId
-- [[vk::ext_decorate_string(decoration, … string literals)]]
-  - Similar to [[vk::ext_decorate(decoration, … int / float / bool literal)]] but it generates OpDecorateString or OpMemberDecorateString.
+- `[[vk::ext_decorate_id(decoration, … constant expression)]]`
+  - Similar to `[[vk::ext_decorate(decoration, … int / float / bool literal)]]` but it generates OpDecorateId
+- `[[vk::ext_decorate_string(decoration, … string literals)]]`
+  - Similar to `[[vk::ext_decorate(decoration, … int / float / bool literal)]]` but it generates OpDecorateString or OpMemberDecorateString.
 
 ### Status
 
 - Github issue tracking overall implementation: https://github.com/microsoft/DirectXShaderCompiler/issues/3919
 - Known issues
-  - Enable [[vk::ext_decorate/_id/_string]] for struct/class fields or function parameter [#4195](https://github.com/microsoft/DirectXShaderCompiler/issues/4195).
+  - Enable `[[vk::ext_decorate/_id/_string]]` for struct/class fields or function parameter [#4195](https://github.com/microsoft/DirectXShaderCompiler/issues/4195).
