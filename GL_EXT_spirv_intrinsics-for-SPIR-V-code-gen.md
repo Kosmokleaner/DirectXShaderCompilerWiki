@@ -240,6 +240,6 @@ Example:
 
 ### Status
 
-- Github issue tracking overall implementation: https://github.com/microsoft/DirectXShaderCompiler/issues/3919
+- Github issue tracking overall implementation: [#3919](https://github.com/microsoft/DirectXShaderCompiler/issues/3919)
 - Known issues
   - Enable `[[vk::ext_decorate/_id/_string]]` for struct/class fields or function parameter [#4195](https://github.com/microsoft/DirectXShaderCompiler/issues/4195).
