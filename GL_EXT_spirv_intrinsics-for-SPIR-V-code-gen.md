@@ -243,3 +243,13 @@ Example:
 - Github issue tracking overall implementation: [#3919](https://github.com/microsoft/DirectXShaderCompiler/issues/3919)
 - Known issues
   - Enable `[[vk::ext_decorate/_id/_string]]` for struct/class fields or function parameter [#4195](https://github.com/microsoft/DirectXShaderCompiler/issues/4195).
+
+### Example code
+
+- [vk::ext_instruction, vk::ext_extension, vk::capability](https://github.com/microsoft/DirectXShaderCompiler/blob/master/tools/clang/test/CodeGenSPIRV/spv.intrinsicInstruction.hlsl)
+- [vk::ext_typedef, vk::ext_type](https://github.com/microsoft/DirectXShaderCompiler/blob/master/tools/clang/test/CodeGenSPIRV/spv.intrinsicTypeInteger.hlsl)
+- [vk::ext_decorate](https://github.com/microsoft/DirectXShaderCompiler/blob/master/tools/clang/test/CodeGenSPIRV/spv.intrinsicDecorate.hlsl)
+- [vk::ext_execution_mode](https://github.com/microsoft/DirectXShaderCompiler/blob/master/tools/clang/test/CodeGenSPIRV/spv.intrinsicExecutionMode.hlsl)
+- [vk::ext_reference, vk::ext_literal](https://github.com/microsoft/DirectXShaderCompiler/blob/master/tools/clang/test/CodeGenSPIRV/spv.intrinsicExecutionMode.hlsl)
+- [vk::ext_result_id](https://github.com/microsoft/DirectXShaderCompiler/blob/master/tools/clang/test/CodeGenSPIRV/spv.intrinsic.result_id.hlsl)
+- [vk::ext_storage_class](https://github.com/microsoft/DirectXShaderCompiler/blob/master/tools/clang/test/CodeGenSPIRV/spv.intrinsicStorageClass.hlsl)
