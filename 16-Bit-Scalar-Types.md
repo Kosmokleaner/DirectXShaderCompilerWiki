@@ -29,7 +29,6 @@ Below is the table of HLSL Name to DXIL type mappings for each HLSL level and mo
 | min12int      | min16int(warning)     | min16int(warning)    | int16_t(warning)                         |
 | min16int      | min16int              | min16int             | int16_t(warning)                         |
 | int16_t       | N/A                   | N/A                  | int16_t                                  |
-| min12uint     | min16uint(warning)    | min16uint(warning)   | uint16_t(warning)                        |
 | min16uint     | min16uint             | min16uint            | uint16_t(warning)                        |
 | uint16_t      | N/A                   | N/A                  | uint16_t                                 |
 | int64_t       | int64_t               | int64_t              | int64_t                                  |
