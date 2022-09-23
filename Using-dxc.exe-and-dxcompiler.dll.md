@@ -55,6 +55,20 @@ The hash for the shader can be saved to file by using the `-Fsh` command-line fl
 
 On Windows, the shader DXIL is hashed to determine the value.  
 
+### Hash format
+
+The blob contents returned using APIs: `IDxcResult::GetOutput(DXC_OUT_SHADER_HASH, ...)` and `IDxcPdbUtils::GetHash(...)`, as well as file contents written using the `-Fsh` option, map to the `DxcShaderHash` structure defined in `dxcapi.h`:
+
+```cpp
+// Hash digest type for ShaderHash
+typedef struct DxcShaderHash {
+  UINT32 Flags; // DXC_HASHFLAG_*
+  BYTE HashDigest[16];
+} DxcShaderHash;
+```
+
+>**NOTE:** The hash blob produced by the `IDxcUtils::GetPDBContents` API does not contain a `DxcShaderHash` structure.  Instead, the hash blob will contain just the raw 16-byte hash digest.
+
 ## Reflection
 
 By default, reflection data is stored in the shader. The `-Qstrip_reflect` flag can be used to remove it.  
@@ -231,10 +245,34 @@ int main()
         wprintf(L"Hash: ");
         DxcShaderHash* pHashBuf = (DxcShaderHash*)pHash->GetBufferPointer();
         for (int i = 0; i < _countof(pHashBuf->HashDigest); i++)
-            wprintf(L"%x", pHashBuf->HashDigest[i]);
+            wprintf(L"%.2x", pHashBuf->HashDigest[i]);
         wprintf(L"\n");
     }
 
+    //
+    // Demonstrate getting the hash from the PDB blob using the IDxcUtils::GetPDBContents API
+    //
+    CComPtr<IDxcBlob> pHashDigestBlob = nullptr;
+    CComPtr<IDxcBlob> pDebugDxilContainer = nullptr;
+    if (SUCCEEDED(pUtils->GetPDBContents(pPdb, &pHashDigestBlob, &pDebugDxilContainer)))
+    {
+        // This API returns the raw hash digest, rather than a DxcShaderHash structure.
+        // This will be the same as the DxcShaderHash::HashDigest returned from
+        // IDxcResult::GetOutput(DXC_OUT_SHADER_HASH, ...).
+        wprintf(L"Hash from PDB: ");
+        const BYTE *pHashDigest = (const BYTE*)pHashDigestBlob->GetBufferPointer();
+        assert(pHashDigestBlob->GetBufferSize() == 16); // hash digest is always 16 bytes.
+        for (int i = 0; i < pHashDigestBlob->GetBufferSize(); i++)
+            wprintf(L"%.2x", pHashDigest[i]);
+        wprintf(L"\n");
+
+        // The pDebugDxilContainer blob will contain a DxilContainer formatted
+        // binary, but with different parts than the pShader blob retrieved
+        // earlier.
+        // The parts in this container will vary depending on debug options and
+        // the compiler version.
+        // This blob is not meant to be directly interpreted by an application.
+    }
 
     //
     // Get separate reflection.
