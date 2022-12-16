@@ -44,10 +44,10 @@ A complete list of command-line flags is obtained by running `dxc.exe -?`. If yo
 Following is an example of using the command-line interface.
 
 ```
-dxc -E main -T ps_6_0 -Fo myshader.bin -Zi -Fd myshader.pdb -D MYDEFINE=1 myshader.hlsl
+dxc -E main -T ps_6_0 -Fo myshader.bin -Zi -Fd myshader.pdb -D MYDEFINE=1 -D MYDEFINE=2 myshader.hlsl
 ```
 
-In this example, myshader.hlsl is compiled to a shader model 6.0 pixel shader. The compiled shader is written to myshader.bin as specified by the `-Fo` flag. Debug information is enabled with the `-Zi` flag, and the .pdb is written out to myshader.pdb with the `-Fd` flag. If you would prefer that the compiler automatically generate a .pdb name, you can supply `.\` as the `-Fd` argument. Again, the debug information in the PDB isn't embedded in the shader. 
+In this example, myshader.hlsl is compiled to a shader model 6.0 pixel shader. The compiled shader is written to myshader.bin as specified by the `-Fo` flag. Debug information is enabled with the `-Zi` flag, and the .pdb is written out to myshader.pdb with the `-Fd` flag. If you would prefer that the compiler automatically generate a .pdb name, you can supply `.\` as the `-Fd` argument. Again, the debug information in the PDB isn't embedded in the shader. For every appearance of "MYDEFINE" within myshader.hlsl, the token will be replaced with "2". Even though "MYDEFINE" has multiple definitions, the compiler will use the last definition of any unique "key" and its associated value.
 
 ## Shader hash
 
