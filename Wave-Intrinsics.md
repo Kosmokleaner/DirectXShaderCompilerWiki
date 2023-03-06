@@ -212,9 +212,10 @@ These intrinsics compute the specified operation across all active non-helper la
 wave and broadcast the final result to all active non-helper lanes.
 Therefore, the final output is guaranteed uniform across the wave.
 
-#### `bool WaveActiveAllEqual(<type> expr )`
+#### `bool<n> WaveActiveAllEqual(<type> expr )`
 
-Returns true if \<expr\> is the same for every active non-helper lane in the current wave
+Returns a scalar or vector of bools matching `<type>` where each bool element is true if `expr`
+is the same for every active non-helper lane in the current wave
 (and thus uniform across it).
 
 #### `uint WaveActiveCountBits( bool bBit )`
