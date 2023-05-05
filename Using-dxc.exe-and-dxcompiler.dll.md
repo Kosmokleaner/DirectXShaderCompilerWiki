@@ -261,7 +261,7 @@ int main()
     //
     CComPtr<IDxcBlob> pHashDigestBlob = nullptr;
     CComPtr<IDxcBlob> pDebugDxilContainer = nullptr;
-    if (SUCCEEDED(pUtils->GetPDBContents(pPdb, &pHashDigestBlob, &pDebugDxilContainer)))
+    if (SUCCEEDED(pUtils->GetPDBContents(pPDB, &pHashDigestBlob, &pDebugDxilContainer)))
     {
         // This API returns the raw hash digest, rather than a DxcShaderHash structure.
         // This will be the same as the DxcShaderHash::HashDigest returned from
