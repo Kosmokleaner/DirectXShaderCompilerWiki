@@ -18,9 +18,9 @@ From an HLSL Console, run this command to build a solution and all projects.
 
     hctbuild
 
-You can also clean, build and run tests with this command.
+You can also tests with this command.
 
-    hctcheckin
+    hcttest
 
 After you have built a solution, you can open it in Visual Studio by running `hctvs`.
 
