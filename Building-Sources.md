@@ -18,7 +18,7 @@ From an HLSL Console, run this command to build a solution and all projects.
 
     hctbuild
 
-You can also tests with this command.
+You can also run tests with this command.
 
     hcttest
 
