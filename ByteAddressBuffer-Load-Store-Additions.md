@@ -1,30 +1,30 @@
 DirectXShaderCompiler has added new versions of `Load` and `Store` methods to the existing `ByteAddressBuffer` and `RWByteAddressBuffer` objects.  The new methods are templated to allow types other than uint, such as aggregate types, to be used directly.
 
-The layout of the type mapped into the buffer matches the layout used for `StructuredBuffer`.  The byteOffset should be aligned by size of the largest component that the type contains.
+The layout of the type mapped into the buffer matches the layout used for `StructuredBuffer`.  The `byteOffset` should be aligned by the size (in bytes) of the largest scalar type contained within type `T`.  For instance, if the largest type is uint64_t, `byteOffset` must be aligned by 8.  If the largest type is `float16_t`, then the minimum alignment required is 2.
 
 The methods are defined like so:
 
 ```C++
 class ByteAddressBuffer {
   ...
-  template<typename _T>
-  _T Load(in uint byteOffset);
+  template<typename T>
+  T Load(in uint byteOffset);
 
-  template<typename _T>
-  _T Load(in uint byteOffset, out uint status);
+  template<typename T>
+  T Load(in uint byteOffset, out uint status);
 };
 
 
 class RWByteAddressBuffer {
   ...
-  template<typename _T>
-  _T Load(in uint byteOffset);
+  template<typename T>
+  T Load(in uint byteOffset);
 
-  template<typename _T>
-  _T Load(in uint byteOffset, out uint status);
+  template<typename T>
+  T Load(in uint byteOffset, out uint status);
 
-  template<typename _T>
-  void Store(in uint byteOffset, in _T value);
+  template<typename T>
+  void Store(in uint byteOffset, in T value);
 };
 ```
 
