@@ -52,7 +52,7 @@ The `__HLSL_VERSION` macro contains an integer representing the HLSL language ve
 * 2016 - compatibility version useful for compatibility with FXC
 * 2017 - Added enums to the language
 * 2018 - Current default version
-* 2021 - Latest version with C++ style features that can be enabled, but is not yet the default
+* 2021 - Latest version with C++ style features that can be enabled (default since [v1.7.2308](https://github.com/microsoft/DirectXShaderCompiler/tree/v1.7.2308))
 
 # Compiler Release Version Defines
 
