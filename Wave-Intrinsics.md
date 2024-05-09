@@ -98,12 +98,12 @@ higher. The term “current wave” refers to the wave of lanes in which the pro
 is executing.
 
 All wave operations with the exception of
-[Wave Query Intrinsics](wave-query-intrinsics) and
-[Quad-Wide Shuffle Operations](quad-wide-shuffle-operations) are disabled on helper lanes.
+[Wave Query Intrinsics](#wave-query-intrinsics) and
+[Quad-Wide Shuffle Operations](#quad-wide-shuffle-operations) are disabled on helper lanes.
 They are treated as if flow control excludes these operations on helper lanes,
 therefore values read from or returned to helper lanes by these operations are undefined.
 
-### Wave Query Intrinsics:
+### Wave Query Intrinsics
 
 #### `bool WaveIsFirstLane()`
 
